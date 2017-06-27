@@ -21,8 +21,9 @@ public class GameScreen implements Screen {
 		map = new SimpleMapBuilder(500, 500).build();
 		player = new Player(map);
 		movePlayerAndScroll(map.width / 2, map.height / 2);
-		player.inventory.giveItem(new Item("Medium Tier Item", "This is the item description.", Tier.MEDIUM));
+		player.inventory.giveItem(new Item("Low Tier Item", "This is the item description.", Tier.LOW));
 		player.inventory.giveItem(new Item("Normal Tier Item", "Wow wee!", Tier.NORMAL));
+		player.inventory.giveItem(new Item("High Tier Item", "This is a very long description that is of a very great length.", Tier.HIGH));
 		map.addCreature(player);
 	}
 	

@@ -29,11 +29,19 @@ public class Inventory {
 		return items.get(inventoryIndex);
 	}
 	
+	public int getEquippedItemIndex(){
+		return inventoryIndex;
+	}
+	
 	public boolean equipItem(int i){
 		if(i < items.size()){
 			inventoryIndex = i;
 			return true;
 		}
 		return false;
+	}
+	
+	public int size(){
+		return items.size();
 	}
 }
