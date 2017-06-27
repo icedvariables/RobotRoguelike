@@ -1,5 +1,6 @@
 package robotroguelike.game;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -21,6 +22,7 @@ public class Game extends JFrame implements KeyListener {
 	public Game(){
 		super();
 		terminal = new AsciiPanel(WIDTH, HEIGHT);
+		terminal.setDefaultForegroundColor(Color.WHITE);
 		add(terminal);
 		pack();
 		

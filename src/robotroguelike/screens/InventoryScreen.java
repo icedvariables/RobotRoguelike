@@ -22,8 +22,8 @@ public class InventoryScreen implements Screen {
 	}
 
 	public void display(AsciiPanel terminal){
-		terminal.write("Inventory", OFFSET_X, OFFSET_Y, Color.WHITE);
-		terminal.write("---------", OFFSET_X, OFFSET_Y + 1, Color.WHITE);
+		terminal.write("Inventory", OFFSET_X, OFFSET_Y);
+		terminal.write("---------", OFFSET_X, OFFSET_Y + 1);
 
 		displayItems(terminal);
 	}
