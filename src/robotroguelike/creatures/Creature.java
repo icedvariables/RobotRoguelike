@@ -9,10 +9,9 @@ import robotroguelike.tiles.Tile;
 public class Creature extends Tile {
 	public Inventory inventory;
 	
-	public int x, y;
+	protected int x, y;
 	
 	private Map map;
-	private CreatureAi ai;
 
 	public Creature(char glyph, Color color, Map map){
 		super(glyph, color);
@@ -24,11 +23,20 @@ public class Creature extends Tile {
 		map.dig(wx, wy, inventory.getEquippedItem());
 	}
 	
-	public void moveBy(int mx, int my){
-		ai.onEnter(x + mx, y + my, map.tileAt(x + mx, y + my));
+	public boolean moveBy(int mx, int my){
+		Tile t = map.tileAt(x + mx, y + my);
+		if(t.canWalkOver){
+			x += mx;
+			y += my;
+		}
+		return t.canWalkOver;
 	}
 	
-	protected void setCreatureAi(CreatureAi ai){
-		this.ai = ai;
+	public int getX(){
+		return x;
+	}
+	
+	public int getY(){
+		return y;
 	}
 }

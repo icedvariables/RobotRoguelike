@@ -21,7 +21,6 @@ public class Game extends JFrame implements KeyListener {
 	public Game(){
 		super();
 		terminal = new AsciiPanel(WIDTH, HEIGHT);
-		terminal.write("Test", 38, 12);
 		add(terminal);
 		pack();
 		

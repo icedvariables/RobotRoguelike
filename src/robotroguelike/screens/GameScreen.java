@@ -16,10 +16,8 @@ public class GameScreen implements Screen {
 	private int scrollX = 0, scrollY = 0;
 
 	public GameScreen(){
-		map = new SimpleMapBuilder(1000, 1000).build();
+		map = new SimpleMapBuilder(500, 500).build();
 		player = new Player(map);
-		player.x = Game.WIDTH / 2;
-		player.y = Game.HEIGHT / 2;
 		map.addCreature(player);
 	}
 	
@@ -40,12 +38,14 @@ public class GameScreen implements Screen {
 	}
 	
 	private void movePlayer(int moveX, int moveY){
-		if(player.x - scrollX == Game.WIDTH / 2)
-			scrollBy(moveX, 0);
-		if(player.y - scrollY == Game.HEIGHT / 2)
-			scrollBy(0, moveY);
-		player.x += moveX;
-		player.y += moveY;
+		boolean movementSuccess = player.moveBy(moveX, moveY);
+		
+		if(movementSuccess){
+			if(player.getX() - scrollX == Game.WIDTH / 2)
+				scrollBy(moveX, 0);
+			if(player.getY() - scrollY == Game.HEIGHT / 2)
+				scrollBy(0, moveY);
+		}
 	}
 	
 	private void displayTiles(AsciiPanel terminal){
@@ -63,8 +63,7 @@ public class GameScreen implements Screen {
 	private void displayCreatures(AsciiPanel terminal){
 		for(int i = 0; i < map.creatures.size(); i++){
 			Creature c = map.creatures.get(i);
-			terminal.write(c.glyph, c.x - scrollX, c.y - scrollY, c.color);
-			System.out.println(c.x + "," + c.y);
+			terminal.write(c.glyph, c.getX() - scrollX, c.getY() - scrollY, c.color);
 		}
 	}
 	
