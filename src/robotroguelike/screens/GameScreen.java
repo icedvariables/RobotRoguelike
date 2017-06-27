@@ -20,6 +20,7 @@ public class GameScreen implements Screen {
 	public GameScreen(){
 		map = new SimpleMapBuilder(500, 500).build();
 		player = new Player(map);
+		movePlayerAndScroll(map.width / 2, map.height / 2);
 		player.inventory.giveItem(new Item("Medium Tier Item", "This is the item description.", Tier.MEDIUM));
 		player.inventory.giveItem(new Item("Normal Tier Item", "Wow wee!", Tier.NORMAL));
 		map.addCreature(player);
@@ -32,27 +33,22 @@ public class GameScreen implements Screen {
 	
 	public Screen respondToInput(KeyEvent key){
 		switch(key.getKeyCode()){
-		case KeyEvent.VK_UP: movePlayer(0, -1); break;
-		case KeyEvent.VK_DOWN: movePlayer(0, 1); break;
-		case KeyEvent.VK_LEFT: movePlayer(-1, 0); break;
-		case KeyEvent.VK_RIGHT: movePlayer(1, 0); break;
+		case KeyEvent.VK_UP: movePlayerAndScroll(0, -1); break;
+		case KeyEvent.VK_DOWN: movePlayerAndScroll(0, 1); break;
+		case KeyEvent.VK_LEFT: movePlayerAndScroll(-1, 0); break;
+		case KeyEvent.VK_RIGHT: movePlayerAndScroll(1, 0); break;
 		case KeyEvent.VK_I: return new InventoryScreen(this, player.inventory);
 		}
 		
 		return this;
 	}
-	
-	private void movePlayer(int moveX, int moveY){
-		boolean movementSuccess = player.moveBy(moveX, moveY);
-		
-		if(movementSuccess){
-			if(player.getX() - scrollX == Game.WIDTH / 2)
-				scrollBy(moveX, 0);
-			if(player.getY() - scrollY == Game.HEIGHT / 2)
-				scrollBy(0, moveY);
-		}
+
+	private void movePlayerAndScroll(int moveX, int moveY){
+		player.moveBy(moveX, moveY);
+		scrollX = player.getX() - (Game.WIDTH / 2);
+		scrollY = player.getY() - (Game.HEIGHT / 2);
 	}
-	
+
 	private void displayTiles(AsciiPanel terminal){
 	    for (int x = 0; x < Game.WIDTH; x++){
 	        for (int y = 0; y < Game.HEIGHT; y++){
@@ -69,12 +65,12 @@ public class GameScreen implements Screen {
 	private void displayCreatures(AsciiPanel terminal){
 		for(int i = 0; i < map.creatures.size(); i++){
 			Creature c = map.creatures.get(i);
-			terminal.write(c.glyph, c.getX() - scrollX, c.getY() - scrollY, c.color);
+			
+			int drawX = c.getX() - scrollX;
+			int drawY = c.getY() - scrollY;
+			
+			if(drawX >= 0 && drawX < Game.WIDTH && drawY >= 0 && drawY < Game.HEIGHT)
+				terminal.write(c.glyph, drawX, drawY, c.color);
 		}
-	}
-	
-	private void scrollBy(int mx, int my){
-		scrollX = Math.max(0, Math.min(scrollX + mx, map.width - 1));
-        scrollY = Math.max(0, Math.min(scrollY + my, map.height - 1));
 	}
 }

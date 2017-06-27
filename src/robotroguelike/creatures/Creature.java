@@ -33,6 +33,11 @@ public class Creature extends Tile {
 		return false;
 	}
 	
+	/*public void setPosition(int x, int y){
+		this.x = x;
+		this.y = y;
+	}*/
+	
 	public int getX(){
 		return x;
 	}

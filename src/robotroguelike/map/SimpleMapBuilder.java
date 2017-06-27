@@ -19,7 +19,7 @@ public class SimpleMapBuilder implements MapBuilder {
             for (int y = 0; y < height; y++){
             	double rand = Math.random();
             	
-                tiles[x][y] = rand < 0.5 ? new TileFloor() : new TileStone();
+                tiles[x][y] = rand < 0.8 ? new TileFloor() : new TileStone();
             }
         }
     }
