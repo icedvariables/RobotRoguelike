@@ -11,15 +11,15 @@ public class Tile {
 	public boolean canWalkOver = true;
 
 	private Item correspondingItem = new Item();
-	private int tier = Tier.NORMAL;
+	private Tier tier = Tier.NORMAL;
 	
 	public Tile(char glyph, Color color){
 		this.glyph = glyph;
 		this.color = color;
 	}
 	
-	public boolean isDiggable(int itemTier){
-		return itemTier >= tier;
+	public boolean isDiggable(Tier itemTier){
+		return itemTier.number >= tier.number;
 	}
 	
 	public Item returnOnDig(){

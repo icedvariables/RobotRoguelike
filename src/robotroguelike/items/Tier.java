@@ -1,9 +1,19 @@
 package robotroguelike.items;
 
+import java.awt.Color;
+
 public class Tier {
-	public static int NORMAL = 0;
-	public static int LOW = 1;
-	public static int MEDIUM = 2;
-	public static int HIGH = 3;
-	public static int VERY_HIGH = 4;
+	public static Tier NORMAL = new Tier(0, Color.WHITE);
+	public static Tier LOW = new Tier(1, Color.RED);
+	public static Tier MEDIUM = new Tier(2, Color.GREEN);
+	public static Tier HIGH = new Tier(3, Color.BLUE);
+	public static Tier VERY_HIGH = new Tier(4, Color.MAGENTA);
+	
+	public final int number;
+	public final Color color;
+	
+	public Tier(int number, Color color){
+		this.number =  number;
+		this.color = color;
+	}
 }

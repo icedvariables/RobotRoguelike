@@ -5,6 +5,8 @@ import java.awt.event.KeyEvent;
 import robotroguelike.creatures.Creature;
 import robotroguelike.creatures.Player;
 import robotroguelike.game.Game;
+import robotroguelike.items.Item;
+import robotroguelike.items.Tier;
 import robotroguelike.map.Map;
 import robotroguelike.map.SimpleMapBuilder;
 import robotroguelike.tiles.Tile;
@@ -18,6 +20,8 @@ public class GameScreen implements Screen {
 	public GameScreen(){
 		map = new SimpleMapBuilder(500, 500).build();
 		player = new Player(map);
+		player.inventory.giveItem(new Item("Medium Tier Item", "This is the item description.", Tier.MEDIUM));
+		player.inventory.giveItem(new Item("Normal Tier Item", "Wow wee!", Tier.NORMAL));
 		map.addCreature(player);
 	}
 	
@@ -32,6 +36,7 @@ public class GameScreen implements Screen {
 		case KeyEvent.VK_DOWN: movePlayer(0, 1); break;
 		case KeyEvent.VK_LEFT: movePlayer(-1, 0); break;
 		case KeyEvent.VK_RIGHT: movePlayer(1, 0); break;
+		case KeyEvent.VK_I: return new InventoryScreen(this, player.inventory);
 		}
 		
 		return this;

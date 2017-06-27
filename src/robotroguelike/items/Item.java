@@ -1,17 +1,19 @@
 package robotroguelike.items;
 
 public class Item {	
+	public int quantity = 1;
 	private String name = "Item";
 	private String description = "An item.";
-	private int tier = Tier.NORMAL;
+	private Tier tier = Tier.NORMAL;
 	
 	// TODO: Implement durability for items.
 	
 	public Item(){}
 	
-	public Item(String name, String description){
+	public Item(String name, String description, Tier tier){
 		this.name = name;
 		this.description = description;
+		this.tier = tier;
 	}
 	
 	public String getName(){
@@ -22,7 +24,7 @@ public class Item {
 		return description;
 	}
 	
-	public int getTier(){
+	public Tier getTier(){
 		return tier;
 	}
 }

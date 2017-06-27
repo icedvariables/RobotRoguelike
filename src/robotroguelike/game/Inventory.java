@@ -10,6 +10,7 @@ public class Inventory {
 	
 	public Inventory(){
 		// TODO: Make inventory have a maximum size.
+		items = new ArrayList<Item>();
 	}
 	
 	public Item getItemAt(int index){
@@ -17,7 +18,7 @@ public class Inventory {
 	}
 	
 	public Item[] getItems(){
-		return (Item[])items.toArray();
+		return items.toArray(new Item[items.size()]);
 	}
 	
 	public void giveItem(Item i){
