@@ -6,7 +6,6 @@ import robotroguelike.creatures.Creature;
 import robotroguelike.items.Item;
 import robotroguelike.tiles.Tile;
 import robotroguelike.tiles.TileFloor;
-import robotroguelike.tiles.TileNull;
 
 public class Map {
 	private Tile[][] tiles;
@@ -25,7 +24,7 @@ public class Map {
 		if(x >= 0 && x < width && y >= 0 && y < height){
 			return tiles[x][y];
 		}
-		return new TileNull();
+		return null;
 	}
 	
 	public Item dig(int x, int y, Item item){

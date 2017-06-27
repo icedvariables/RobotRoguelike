@@ -25,11 +25,12 @@ public class Creature extends Tile {
 	
 	public boolean moveBy(int mx, int my){
 		Tile t = map.tileAt(x + mx, y + my);
-		if(t.canWalkOver){
+		if(t != null && t.canWalkOver){
 			x += mx;
 			y += my;
+			return true;
 		}
-		return t.canWalkOver;
+		return false;
 	}
 	
 	public int getX(){

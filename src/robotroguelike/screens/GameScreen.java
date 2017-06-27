@@ -55,7 +55,8 @@ public class GameScreen implements Screen {
 	            int wy = y + scrollY;
 	            
 	            Tile t = map.tileAt(wx, wy);
-	            terminal.write(t.glyph, x, y, t.color);
+	            if(t != null)
+	            	terminal.write(t.glyph, x, y, t.color);
 	        }
 	    }
 	}

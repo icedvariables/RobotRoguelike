@@ -4,7 +4,6 @@ import java.awt.Color;
 
 import robotroguelike.items.Item;
 import robotroguelike.items.Tier;
-import robotroguelike.map.Map;
 
 public class Tile {
 	public char glyph;
