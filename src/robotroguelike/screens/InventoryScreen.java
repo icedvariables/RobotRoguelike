@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 
 import asciiPanel.AsciiPanel;
+import robotroguelike.game.Game;
 import robotroguelike.game.Inventory;
 import robotroguelike.items.Item;
 
@@ -13,7 +14,7 @@ public class InventoryScreen implements Screen {
 	
 	private int selectorIndex = 0;
 	
-	private final int OFFSET_X = 4, OFFSET_Y = 3, DESCRIPTION_OFFSET = 25;
+	private final int OFFSET_X = 4, OFFSET_Y = 3, DESCRIPTION_OFFSET = 25, EQUIPPED_OFFSET = Game.WIDTH - 13;
 
 	public InventoryScreen(Screen returnScreen, Inventory inventory){
 		this.returnScreen = returnScreen;
@@ -33,6 +34,8 @@ public class InventoryScreen implements Screen {
 		for(int i = 0; i < items.length; i++){
 			terminal.write(items[i].getName(), OFFSET_X + 3, OFFSET_Y + 3 + i, items[i].getTier().color);
 			terminal.write(items[i].getDescription(), OFFSET_X + 3 + DESCRIPTION_OFFSET, OFFSET_Y + 3 + i);
+			if(i == inventory.getEquippedItemIndex())
+				terminal.write("(equipped)", EQUIPPED_OFFSET, OFFSET_Y + 3 + i, Color.GREEN);
 		}
 		
 		// Selector:
@@ -51,6 +54,8 @@ public class InventoryScreen implements Screen {
 			if(selectorIndex > 0)
 				selectorIndex--;
 			break;
+		case KeyEvent.VK_E:
+			inventory.equipItem(selectorIndex);
 		}
 		
 		return this;
