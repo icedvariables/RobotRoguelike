@@ -3,23 +3,24 @@ package robotroguelike.tiles;
 import java.awt.Color;
 
 import robotroguelike.items.Item;
+import robotroguelike.items.Tier;
 import robotroguelike.map.Map;
 
 public class Tile {
 	public char glyph;
 	public Color color;
-	
-	protected Map map;
+	public boolean canWalkOver = true;
+
 	private Item correspondingItem = new Item();
-	private int tierRequiredToMine;
+	private int tier = Tier.NORMAL;
 	
 	public Tile(char glyph, Color color){
 		this.glyph = glyph;
 		this.color = color;
 	}
 	
-	public boolean isDiggable(Item i){
-		return i.getTier() >= tierRequiredToMine;
+	public boolean isDiggable(int itemTier){
+		return itemTier >= tier;
 	}
 	
 	public Item returnOnDig(){
