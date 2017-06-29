@@ -10,8 +10,8 @@ public class Tile {
 	public Color color;
 	public boolean canWalkOver = true;
 
-	private Item correspondingItem = new Item();
-	private Tier tier = Tier.NORMAL;
+	private Item correspondingItem;
+	private Tier tier = Tier.LOW;
 	
 	public Tile(char glyph, Color color){
 		this.glyph = glyph;

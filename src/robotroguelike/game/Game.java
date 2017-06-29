@@ -15,6 +15,7 @@ public class Game extends JFrame implements KeyListener {
 	
 	public static final int WIDTH = 120;
 	public static final int HEIGHT = 36;
+	public static final int DEFAULT_ITEM_STACK_MAX_QUANTITY = 50;
 
 	private AsciiPanel terminal;
 	private Screen screen;

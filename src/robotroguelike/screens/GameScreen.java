@@ -6,6 +6,7 @@ import robotroguelike.creatures.Creature;
 import robotroguelike.creatures.Player;
 import robotroguelike.game.Game;
 import robotroguelike.items.Item;
+import robotroguelike.items.ItemIronIngot;
 import robotroguelike.items.Tier;
 import robotroguelike.map.Map;
 import robotroguelike.map.SimpleMapBuilder;
@@ -20,10 +21,8 @@ public class GameScreen implements Screen {
 	public GameScreen(){
 		map = new SimpleMapBuilder(500, 500).build();
 		player = new Player(map);
+		player.inventory.giveItem(new ItemIronIngot());
 		movePlayerAndScroll(map.width / 2, map.height / 2);
-		player.inventory.giveItem(new Item("Low Tier Item", "This is the item description.", Tier.LOW));
-		player.inventory.giveItem(new Item("Normal Tier Item", "Wow wee!", Tier.NORMAL));
-		player.inventory.giveItem(new Item("High Tier Item", "This is a very long description that is of a very great length.", Tier.HIGH));
 		map.addCreature(player);
 	}
 	

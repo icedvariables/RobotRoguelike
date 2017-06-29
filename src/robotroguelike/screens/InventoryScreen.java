@@ -7,6 +7,7 @@ import asciiPanel.AsciiPanel;
 import robotroguelike.game.Game;
 import robotroguelike.game.Inventory;
 import robotroguelike.items.Item;
+import robotroguelike.items.ItemStack;
 
 public class InventoryScreen implements Screen {
 	private Screen returnScreen;
@@ -29,18 +30,21 @@ public class InventoryScreen implements Screen {
 	}
 
 	private void displayItems(AsciiPanel terminal){
-		Item[] items = inventory.getItems();
+		ItemStack[] items = inventory.getItems();
 
 		for(int i = 0; i < items.length; i++){
-			terminal.write(items[i].getName(), OFFSET_X + 3, OFFSET_Y + 3 + i, items[i].getTier().color);
-			terminal.write(items[i].getDescription(), OFFSET_X + 3 + DESCRIPTION_OFFSET, OFFSET_Y + 3 + i);
+			Item itm = items[i].getItem();
+
+			terminal.write(items[i].getQuantity() + " x ", OFFSET_X + 3, OFFSET_Y + 3 + i);
+			terminal.write(itm.getName(), OFFSET_X + 8, OFFSET_Y + 3 + i, itm.getTier().color);
+			terminal.write(itm.getDescription(), OFFSET_X + 8 + DESCRIPTION_OFFSET, OFFSET_Y + 3 + i);
 			if(i == inventory.getEquippedItemIndex())
 				terminal.write("(equipped)", EQUIPPED_OFFSET, OFFSET_Y + 3 + i, Color.GREEN);
 		}
 		
 		// Selector:
-		terminal.write((char)223, OFFSET_X, OFFSET_Y + 3 + selectorIndex, Color.WHITE);
-		
+		if(!inventory.isEmpty())
+			terminal.write((char)223, OFFSET_X, OFFSET_Y + 3 + selectorIndex, Color.WHITE);
 	}
 
 	public Screen respondToInput(KeyEvent key){
