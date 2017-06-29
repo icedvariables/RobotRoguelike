@@ -2,6 +2,7 @@ package robotroguelike.items;
 
 public class ItemStack {
 	public final int maxQuantity;
+	public boolean selectedInInventory = false;
 	
 	private Item item;
 	private int quantity = 1;

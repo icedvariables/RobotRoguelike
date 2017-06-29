@@ -15,7 +15,7 @@ public class InventoryScreen implements Screen {
 	
 	private int selectorIndex = 0;
 	
-	private final int OFFSET_X = 4, OFFSET_Y = 3, DESCRIPTION_OFFSET = 25, EQUIPPED_OFFSET = Game.WIDTH - 13;
+	private final int OFFSET_X = 4, OFFSET_Y = 3, DESCRIPTION_OFFSET = 25, EQUIPPED_OFFSET = Game.WIDTH - 13, SELECTED_OFFSET = Game.WIDTH - 25;
 
 	public InventoryScreen(Screen returnScreen, Inventory inventory){
 		this.returnScreen = returnScreen;
@@ -38,8 +38,11 @@ public class InventoryScreen implements Screen {
 			terminal.write(items[i].getQuantity() + " x ", OFFSET_X + 3, OFFSET_Y + 3 + i);
 			terminal.write(itm.getName(), OFFSET_X + 8, OFFSET_Y + 3 + i, itm.getTier().color);
 			terminal.write(itm.getDescription(), OFFSET_X + 8 + DESCRIPTION_OFFSET, OFFSET_Y + 3 + i);
+			
 			if(i == inventory.getEquippedItemIndex())
-				terminal.write("(equipped)", EQUIPPED_OFFSET, OFFSET_Y + 3 + i, Color.GREEN);
+				terminal.write("(equipped)", EQUIPPED_OFFSET, OFFSET_Y + 3 + i, Color.RED);
+			if(items[i].selectedInInventory)
+				terminal.write("(selected)", SELECTED_OFFSET, OFFSET_Y + 3 + i, Color.GREEN);
 		}
 		
 		// Selector:
@@ -60,6 +63,10 @@ public class InventoryScreen implements Screen {
 			break;
 		case KeyEvent.VK_E:
 			inventory.equipItem(selectorIndex);
+			break;
+		case KeyEvent.VK_ENTER:
+			inventory.toggleItemSelection(selectorIndex);
+			break;
 		}
 		
 		return this;
