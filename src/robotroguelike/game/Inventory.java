@@ -1,6 +1,7 @@
 package robotroguelike.game;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import robotroguelike.items.Item;
 import robotroguelike.items.ItemStack;
@@ -8,7 +9,7 @@ import robotroguelike.items.ItemStack;
 public class Inventory {
 	public static final int NO_EQUIPPED_ITEM = -1;
 
-	private ArrayList<ItemStack> items;
+	private List<ItemStack> items;
 	private int equippedItemIndex = NO_EQUIPPED_ITEM; // The index for the currently equipped item.
 	
 	public Inventory(){
@@ -46,12 +47,35 @@ public class Inventory {
 		return equippedItemIndex;
 	}
 	
+	public ItemStack[] getSelectedItems(){
+		List<ItemStack> selectedItems = new ArrayList<ItemStack>();
+		
+		for(int i = 0; i < size(); i++){
+			if(items.get(i).selectedInInventory)
+				selectedItems.add(items.get(i));
+		}
+		
+		return selectedItems.toArray(new ItemStack[selectedItems.size()]);
+	}
+	
 	public boolean equipItem(int i){
 		if(i < items.size() && i > 0 && items.get(i).getItem().isEquippable()){
 			equippedItemIndex = i;
 			return true;
 		}
 		return false;
+	}
+	
+	public void toggleItemSelection(int i){
+		items.get(i).selectedInInventory = !items.get(i).selectedInInventory;
+	}
+	
+	public void selectItem(int i){
+		items.get(i).selectedInInventory = true;
+	}
+	
+	public void deselectItem(int i){
+		items.get(i).selectedInInventory = false;
 	}
 	
 	public int size(){
