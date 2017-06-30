@@ -1,7 +1,6 @@
 package robotroguelike.items;
 
 public class Item {
-	public final int maxQuantity;
 	public final int id;
 
 	private String name = "Item";
@@ -11,17 +10,11 @@ public class Item {
 	
 	// TODO: Implement durability for items.
 	
-	/*public Item(){
-		id = 0x404;
-		maxQuantity = 50;
-	}*/
-	
-	public Item(int id, String name, String description, Tier tier, int maxQuantity, boolean equippable){
+	public Item(int id, String name, String description, Tier tier, boolean equippable){
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.tier = tier;
-		this.maxQuantity = maxQuantity;
 		this.equippable = equippable;
 	}
 	

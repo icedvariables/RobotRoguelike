@@ -1,7 +1,6 @@
 package robotroguelike.items;
 
 public class ItemStack {
-	public final int maxQuantity;
 	public boolean selectedInInventory = false;
 	
 	private Item item;
@@ -10,7 +9,6 @@ public class ItemStack {
 	public ItemStack(Item item, int quantity){
 		this.item = item;
 		this.quantity = quantity;
-		this.maxQuantity = item.maxQuantity;
 	}
 	
 	public Item getItem(){
@@ -22,7 +20,7 @@ public class ItemStack {
 	}
 	
 	public boolean setQuantity(int q){
-		if(q < maxQuantity && q > 0){
+		if(q > 0){
 			quantity = q;
 			return true;
 		}

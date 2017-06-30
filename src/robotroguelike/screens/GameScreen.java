@@ -23,7 +23,8 @@ public class GameScreen implements Screen {
 		CraftingManager.addAllCraftingRecipes();
 		player = new Player(map);
 
-		player.inventory.giveItemStack(new ItemStack(new ItemIronIngot(), 2));
+		player.inventory.giveItemStack(new ItemStack(new ItemIronIngot(), 50));
+		player.inventory.giveItem(new ItemIronIngot());
 
 		movePlayerAndScroll(map.width / 2, map.height / 2);
 		map.addCreature(player);
