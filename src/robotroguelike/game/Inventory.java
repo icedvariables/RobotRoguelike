@@ -1,8 +1,10 @@
 package robotroguelike.game;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import robotroguelike.crafting.CraftingRecipe;
 import robotroguelike.items.Item;
 import robotroguelike.items.ItemStack;
 
@@ -15,6 +17,18 @@ public class Inventory {
 	public Inventory(){
 		// TODO: Make inventory have a maximum size.
 		items = new ArrayList<ItemStack>();
+	}
+	
+	public boolean craft(CraftingRecipe recipe){
+		Item item = recipe.item;
+		ItemStack[] ingredients = recipe.ingredients;
+
+		boolean success = consumeItems(ingredients);
+
+		if(success)
+			giveItem(item);
+
+		return success;
 	}
 	
 	public ItemStack getItemStackAt(int index){
@@ -34,6 +48,11 @@ public class Inventory {
 		}
 		// If no existing stacks to increase the quantity of then make a new stack.
 		items.add(new ItemStack(itm, 1));
+	}
+	
+	public void giveItemStack(ItemStack stack){
+		// TODO: Add new stacks to existing stacks rather than having them separate.
+		items.add(stack);
 	}
 	
 	public Item getEquippedItem(){
@@ -62,6 +81,52 @@ public class Inventory {
 		if(i < items.size() && i > 0 && items.get(i).getItem().isEquippable()){
 			equippedItemIndex = i;
 			return true;
+		}
+		return false;
+	}
+	
+	public boolean consumeItems(ItemStack[] stacks){
+		if(!hasItems(stacks))
+			return false;
+
+		List<Integer> stacksToBeRemovedIndexes = new ArrayList<Integer>();
+
+		for(int i = 0; i < stacks.length; i++){
+			for(int j = 0; j < items.size(); j++){
+				if(items.get(j).getItem().id == stacks[i].getItem().id){
+					boolean success = items.get(j).decreaseQuantityBy(stacks[i].getQuantity());
+					
+					if(!success)
+						stacksToBeRemovedIndexes.add(j);
+				}
+			}
+		}
+
+		// Remove any stacks that now have a quantity of 0.
+		// Put the indexes of these stacks in reverse order so that by removing them,
+		// the position of the next stack to be removed is not shifted.
+		Collections.sort(stacksToBeRemovedIndexes);
+		Collections.reverse(stacksToBeRemovedIndexes);
+
+		for(int i = 0; i < stacksToBeRemovedIndexes.size(); i++){
+			items.remove(stacksToBeRemovedIndexes.get(i).intValue()); // .intValue() is needed to convert from Integer to int.
+		}
+
+		return true;
+	}
+	
+	public boolean hasItems(ItemStack[] array){
+		for(int i = 0; i < array.length; i++){
+			if(!hasItemStack(array[i]))
+				return false;
+		}
+		return true;
+	}
+	
+	public boolean hasItemStack(ItemStack stack){
+		for(int i = 0; i < items.size(); i++){
+			if(items.get(i).getItem().id == stack.getItem().id && items.get(i).getQuantity() >= stack.getQuantity())
+				return true;
 		}
 		return false;
 	}

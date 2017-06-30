@@ -52,6 +52,7 @@ public class InventoryScreen implements Screen {
 
 	public Screen respondToInput(KeyEvent key){
 		switch(key.getKeyCode()){
+		case KeyEvent.VK_ESCAPE:
 		case KeyEvent.VK_I: return returnScreen;
 		case KeyEvent.VK_DOWN:
 			if(selectorIndex + 1 < inventory.size())

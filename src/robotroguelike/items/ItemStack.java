@@ -29,7 +29,16 @@ public class ItemStack {
 		return false; // Failed.
 	}
 	
+	public boolean decreaseQuantityBy(int x){
+		return setQuantity(quantity - x);
+	}
+	
 	public boolean increaseQuantityByOne(){
 		return setQuantity(quantity + 1);
+	}
+	
+	@Override
+	public String toString(){
+		return quantity + " x " + item.getName();
 	}
 }

@@ -2,10 +2,12 @@ package robotroguelike.screens;
 
 import java.awt.event.KeyEvent;
 
+import robotroguelike.crafting.CraftingManager;
 import robotroguelike.creatures.Creature;
 import robotroguelike.creatures.Player;
 import robotroguelike.game.Game;
 import robotroguelike.items.ItemIronIngot;
+import robotroguelike.items.ItemStack;
 import robotroguelike.map.Map;
 import robotroguelike.map.SimpleMapBuilder;
 import robotroguelike.tiles.Tile;
@@ -18,8 +20,11 @@ public class GameScreen implements Screen {
 
 	public GameScreen(){
 		map = new SimpleMapBuilder(500, 500).build();
+		CraftingManager.addAllCraftingRecipes();
 		player = new Player(map);
-		player.inventory.giveItem(new ItemIronIngot());
+
+		player.inventory.giveItemStack(new ItemStack(new ItemIronIngot(), 2));
+
 		movePlayerAndScroll(map.width / 2, map.height / 2);
 		map.addCreature(player);
 	}
@@ -36,6 +41,7 @@ public class GameScreen implements Screen {
 		case KeyEvent.VK_LEFT: movePlayerAndScroll(-1, 0); break;
 		case KeyEvent.VK_RIGHT: movePlayerAndScroll(1, 0); break;
 		case KeyEvent.VK_I: return new InventoryScreen(this, player.inventory);
+		case KeyEvent.VK_C: return new CraftingScreen(this, player.inventory);
 		}
 		
 		return this;
