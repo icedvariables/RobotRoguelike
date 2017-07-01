@@ -69,7 +69,7 @@ public class CraftingScreen implements Screen {
 		case KeyEvent.VK_C:
 			return returnScreen;
 		case KeyEvent.VK_DOWN:
-			if (selectorIndex + 1 < inventory.size())
+			if (selectorIndex + 1 < CraftingManager.getRecipes().length)
 				selectorIndex++;
 			break;
 		case KeyEvent.VK_UP:
