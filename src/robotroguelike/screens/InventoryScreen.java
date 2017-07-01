@@ -12,9 +12,9 @@ import robotroguelike.items.ItemStack;
 public class InventoryScreen implements Screen {
 	private Screen returnScreen;
 	private Inventory inventory;
-	
+
 	private int selectorIndex = 0;
-	
+
 	private final int OFFSET_X = 4, OFFSET_Y = 3, DESCRIPTION_OFFSET = 25, EQUIPPED_OFFSET = Game.WIDTH - 13, SELECTED_OFFSET = Game.WIDTH - 25;
 
 	public InventoryScreen(Screen returnScreen, Inventory inventory){
@@ -38,13 +38,13 @@ public class InventoryScreen implements Screen {
 			terminal.write(items[i].getQuantity() + " x ", OFFSET_X + 3, OFFSET_Y + 3 + i);
 			terminal.write(itm.getName(), OFFSET_X + 8, OFFSET_Y + 3 + i, itm.getTier().color);
 			terminal.write(itm.getDescription(), OFFSET_X + 8 + DESCRIPTION_OFFSET, OFFSET_Y + 3 + i);
-			
+
 			if(items[i] == inventory.getEquippedItemStack())
 				terminal.write("(equipped)", EQUIPPED_OFFSET, OFFSET_Y + 3 + i, Color.RED);
 			if(items[i].selectedInInventory)
 				terminal.write("(selected)", SELECTED_OFFSET, OFFSET_Y + 3 + i, Color.GREEN);
 		}
-		
+
 		// Selector:
 		if(!inventory.isEmpty())
 			terminal.write((char)223, OFFSET_X, OFFSET_Y + 3 + selectorIndex, Color.WHITE);
@@ -69,7 +69,7 @@ public class InventoryScreen implements Screen {
 			inventory.toggleItemSelection(selectorIndex);
 			break;
 		}
-		
+
 		return this;
 	}
 }

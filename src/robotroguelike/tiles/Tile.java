@@ -14,16 +14,16 @@ public class Tile implements Serializable {
 	public boolean canWalkOver = true;
 
 	private Tier tier = Tier.LOW;
-	
+
 	public Tile(char glyph, Color color){
 		this.glyph = glyph;
 		this.color = color;
 	}
-	
+
 	public boolean isDiggableWith(Tier itemTier){
 		return itemTier.number >= tier.number;
 	}
-	
+
 	public Item returnOnDig(){
 		return null;
 	}

@@ -3,22 +3,22 @@ package robotroguelike.screens;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 
+import asciiPanel.AsciiPanel;
 import robotroguelike.crafting.CraftingManager;
 import robotroguelike.crafting.CraftingRecipe;
 import robotroguelike.game.Game;
 import robotroguelike.game.Inventory;
 import robotroguelike.items.Item;
 import robotroguelike.items.ItemStack;
-import asciiPanel.AsciiPanel;
 
 public class CraftingScreen implements Screen {
 	private Screen returnScreen;
 	private Inventory inventory;
-	
+
 	private int selectorIndex = 0;
-	
+
 	private final int OFFSET_X = 4, OFFSET_Y = 3, INGREDIENTS_OFFSET = 25, INVENTORY_OFFSET = Game.HEIGHT - 3;
-	
+
 	public CraftingScreen(Screen returnScreen, Inventory inventory){
 		this.returnScreen = returnScreen;
 		this.inventory = inventory;
@@ -27,13 +27,13 @@ public class CraftingScreen implements Screen {
 	public void display(AsciiPanel terminal){
 		terminal.write("Crafting", OFFSET_X, OFFSET_Y);
 		terminal.write("--------", OFFSET_X, OFFSET_Y + 1);
-		
+
 		displayCraftingList(terminal);
 	}
-	
+
 	public void displayCraftingList(AsciiPanel terminal){
 		CraftingRecipe[] recipes = CraftingManager.getRecipes();
-		
+
 		for(int i = 0; i < recipes.length; i++){
 			Item item = recipes[i].item;
 			ItemStack[] ingredients = recipes[i].ingredients;
@@ -45,7 +45,7 @@ public class CraftingScreen implements Screen {
 		// Selector:
 		if(recipes.length > 0)
 			terminal.write((char)223, OFFSET_X, OFFSET_Y + 3 + selectorIndex, Color.WHITE);
-		
+
 		// Mini inventory:
 		terminal.write("Inventory: " + inventory.toString(), OFFSET_X, INVENTORY_OFFSET);
 	}

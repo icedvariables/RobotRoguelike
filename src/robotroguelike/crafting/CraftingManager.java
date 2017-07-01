@@ -11,7 +11,7 @@ import robotroguelike.items.ItemStoneHandle;
 
 public class CraftingManager {
 	private static final List<CraftingRecipe> recipes = new ArrayList<CraftingRecipe>();
-	
+
 	public static void addAllCraftingRecipes(){
 		addCraftingRecipe(new CraftingRecipe(new ItemStoneHandle(),
 				new ItemStack[]{new ItemStack(new ItemStone(), 3)}));
@@ -23,18 +23,18 @@ public class CraftingManager {
 		recipes.add(recipe);
 		return recipe;
 	}
-	
+
 	public static CraftingRecipe[] getRecipes(){
 		return recipes.toArray(new CraftingRecipe[recipes.size()]);
 	}
-	
+
 	public static Item[] getItems(){
 		Item[] items = new Item[recipes.size()];
 
 		for(int i = 0; i < recipes.size(); i++){
 			items[i] = recipes.get(i).item;
 		}
-		
+
 		return items;
 	}
 }
