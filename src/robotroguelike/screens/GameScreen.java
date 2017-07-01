@@ -25,25 +25,33 @@ public class GameScreen implements Screen {
 
 	public GameScreen(boolean buildMap) {
 		if (buildMap) {
-			map = new SimpleMapBuilder(500, 500).build();
-
-			CraftingManager.addAllCraftingRecipes();
-			player = new Player(map);
-
-			player.inventory.giveItemStack(new ItemStack(new ItemStone(), 25));
-			player.inventory.giveItemStack(new ItemStack(new ItemIronIngot(), 25));
-
-			movePlayerAndScroll(map.width / 2, map.height / 2);
-			map.addCreature(player);
+			buildNewMap();
 		} else {
-			map = MapManager.loadMap("map");
-
-			for (int i = 0; i < map.creatures.size(); i++) {
-				if (map.creatures.get(i) instanceof Player)
-					player = (Player) map.creatures.get(i);
-			}
-			infoString = "Loaded map from save file '" + map.name + MapManager.FILE_EXTENSION + "'.";
+			loadExistingMap();
 		}
+	}
+
+	private void buildNewMap() {
+		map = new SimpleMapBuilder(500, 500).build();
+
+		CraftingManager.addAllCraftingRecipes();
+		player = new Player(map);
+
+		player.inventory.giveItemStack(new ItemStack(new ItemStone(), 25));
+		player.inventory.giveItemStack(new ItemStack(new ItemIronIngot(), 25));
+
+		movePlayerAndScroll(map.width / 2, map.height / 2);
+		map.addCreature(player);
+	}
+
+	private void loadExistingMap() {
+		map = MapManager.loadMap("map");
+
+		for (int i = 0; i < map.creatures.size(); i++) {
+			if (map.creatures.get(i) instanceof Player)
+				player = (Player) map.creatures.get(i);
+		}
+		infoString = "Loaded map from save file '" + map.name + MapManager.FILE_EXTENSION + "'.";
 	}
 
 	public void display(AsciiPanel terminal) {

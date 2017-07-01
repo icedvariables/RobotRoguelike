@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import robotroguelike.game.Game;
+import robotroguelike.game.MapFileInvalidVersionException;
 
 public class MapManager {
 	public static final String SAVE_DIRECTORY = "/saves/";
@@ -54,8 +55,9 @@ public class MapManager {
 			ois = new ObjectInputStream(fin);
 
 			version = (String) ois.readObject();
-			if (version != Game.VERSION)
-				throw new Exception("Attempt");
+			if (!version.equals(Game.VERSION)) {
+				throw new MapFileInvalidVersionException("Attempted to load map file with version " + version + " but failed as game is version " + Game.VERSION + ".");
+			}
 			map = (Map) ois.readObject();
 
 			System.out.println("Loaded map '" + name + "' from file: " + f + " successfully.");
