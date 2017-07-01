@@ -10,7 +10,7 @@ public class MainMenuScreen implements Screen {
 		terminal.writeCenter("-- Robot Roguelike --", 5);
 		terminal.writeCenter("---", 7);
 		terminal.writeCenter("Press [enter] to build a new map.", 10);
-		terminal.writeCenter("Press [space] to load an existing map", 11);
+		terminal.writeCenter("Press [space] to load an existing map.", 11);
 	}
 
 	@Override

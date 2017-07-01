@@ -11,17 +11,17 @@ public class MapManager {
 	public static final String SAVE_DIRECTORY = "/saves/";
 	public static final String FILE_EXTENSION = ".sav";
 	
-	public static void saveMap(Map map, String name){
+	public static void saveMap(Map map){
 		FileOutputStream fout = null;
 		ObjectOutputStream oos = null;
 
 		try{
-			File f = new File(System.getProperty("user.dir"), SAVE_DIRECTORY + name + FILE_EXTENSION);
+			File f = new File(System.getProperty("user.dir"), SAVE_DIRECTORY + map.name + FILE_EXTENSION);
 			fout = new FileOutputStream(f);
 			oos = new ObjectOutputStream(fout);
 			oos.writeObject(map);
 			
-			System.out.println("Saved map '" + name + "' to file: " + f + " successfully.");
+			System.out.println("Saved map '" + map.name + "' to file: " + f + " successfully.");
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{

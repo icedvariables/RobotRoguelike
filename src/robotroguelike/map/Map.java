@@ -10,6 +10,8 @@ import robotroguelike.tiles.TileFloor;
 
 public class Map implements Serializable {
 	private static final long serialVersionUID = -3802009101439612931L;
+	
+	public final String name = "map";
 
 	private Tile[][] tiles;
 	public ArrayList<Creature> creatures = new ArrayList<Creature>();

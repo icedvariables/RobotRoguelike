@@ -17,6 +17,8 @@ import robotroguelike.map.SimpleMapBuilder;
 import robotroguelike.tiles.Tile;
 
 public class GameScreen implements Screen {
+	public String infoString = "";
+	
 	private Map map;
 	private Player player;
 	private int scrollX = 0, scrollY = 0;
@@ -40,6 +42,7 @@ public class GameScreen implements Screen {
 				if(map.creatures.get(i) instanceof Player)
 					player = (Player)map.creatures.get(i);
 			}
+			infoString = "Loaded map from save file '" + map.name + MapManager.FILE_EXTENSION + "'.";
 		}
 	}
 	
@@ -47,6 +50,7 @@ public class GameScreen implements Screen {
 	public void display(AsciiPanel terminal){
 		displayTiles(terminal);
 		displayCreatures(terminal);
+		terminal.write(infoString, 0, Game.HEIGHT - 1);
 	}
 	
 	@Override
@@ -71,7 +75,10 @@ public class GameScreen implements Screen {
 		case KeyEvent.VK_I: return new InventoryScreen(this, player.inventory);
 		case KeyEvent.VK_C: return new CraftingScreen(this, player.inventory);
 		case KeyEvent.VK_SPACE: player.dig(player.getX() + player.direction[0], player.getY() + player.direction[1]); break;
-		case KeyEvent.VK_S: MapManager.saveMap(map, "map"); break;
+		case KeyEvent.VK_S:
+			MapManager.saveMap(map);
+			infoString = "Saved map to save file '" + map.name + MapManager.FILE_EXTENSION + "'.";
+			break;
 		}
 		
 		return this;
