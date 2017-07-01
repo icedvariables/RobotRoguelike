@@ -10,17 +10,21 @@ import java.io.ObjectOutputStream;
 public class MapManager {
 	public static final String SAVE_DIRECTORY = "/saves/";
 	public static final String FILE_EXTENSION = ".sav";
-	
+
 	public static void saveMap(Map map){
 		FileOutputStream fout = null;
 		ObjectOutputStream oos = null;
 
 		try{
-			File f = new File(System.getProperty("user.dir"), SAVE_DIRECTORY + map.name + FILE_EXTENSION);
+			File dir = new File(System.getProperty("user.dir"), SAVE_DIRECTORY);
+			if(!dir.exists())
+				dir.mkdirs();
+
+			File f = new File(dir, map.name + FILE_EXTENSION);
 			fout = new FileOutputStream(f);
 			oos = new ObjectOutputStream(fout);
 			oos.writeObject(map);
-			
+
 			System.out.println("Saved map '" + map.name + "' to file: " + f + " successfully.");
 		}catch(Exception e){
 			e.printStackTrace();
@@ -33,7 +37,7 @@ public class MapManager {
 			}
 		}
 	}
-	
+
 	public static Map loadMap(String name){
 		FileInputStream fin = null;
 		ObjectInputStream ois = null;
@@ -44,7 +48,7 @@ public class MapManager {
 			fin = new FileInputStream(f);
 			ois = new ObjectInputStream(fin);
 			map = (Map)ois.readObject();
-			
+
 			System.out.println("Loaded map '" + name + "' from file: " + f + " successfully.");
 		}catch(Exception e){
 			e.printStackTrace();

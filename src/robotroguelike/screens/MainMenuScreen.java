@@ -5,7 +5,6 @@ import java.awt.event.KeyEvent;
 import asciiPanel.AsciiPanel;
 
 public class MainMenuScreen implements Screen {
-	@Override
 	public void display(AsciiPanel terminal){
 		terminal.writeCenter("-- Robot Roguelike --", 5);
 		terminal.writeCenter("---", 7);
@@ -13,17 +12,16 @@ public class MainMenuScreen implements Screen {
 		terminal.writeCenter("Press [space] to load an existing map.", 11);
 	}
 
-	@Override
 	public Screen respondToInput(KeyEvent key){
-        int keyCode = key.getKeyCode();
-        
-        if(keyCode == KeyEvent.VK_ENTER)
-        	return new GameScreen(true);
-        if(keyCode == KeyEvent.VK_SPACE)
-        	return new GameScreen(false);
-        if(keyCode == KeyEvent.VK_ESCAPE)
-        	System.exit(0);
-        
-        return this;
-    }
+		int keyCode = key.getKeyCode();
+
+		if(keyCode == KeyEvent.VK_ENTER)
+			return new GameScreen(true);
+		if(keyCode == KeyEvent.VK_SPACE)
+			return new GameScreen(false);
+		if(keyCode == KeyEvent.VK_ESCAPE)
+			System.exit(0);
+
+		return this;
+	}
 }

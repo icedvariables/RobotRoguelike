@@ -18,7 +18,7 @@ import robotroguelike.tiles.Tile;
 
 public class GameScreen implements Screen {
 	public String infoString = "";
-	
+
 	private Map map;
 	private Player player;
 	private int scrollX = 0, scrollY = 0;
@@ -26,18 +26,18 @@ public class GameScreen implements Screen {
 	public GameScreen(boolean buildMap){
 		if(buildMap){
 			map = new SimpleMapBuilder(500, 500).build();
-			
+
 			CraftingManager.addAllCraftingRecipes();
 			player = new Player(map);
-	
+
 			player.inventory.giveItemStack(new ItemStack(new ItemStone(), 25));
 			player.inventory.giveItemStack(new ItemStack(new ItemIronIngot(), 25));
-	
+
 			movePlayerAndScroll(map.width / 2, map.height / 2);
 			map.addCreature(player);
 		}else{
 			map = MapManager.loadMap("map");
-			
+
 			for(int i = 0; i < map.creatures.size(); i++){
 				if(map.creatures.get(i) instanceof Player)
 					player = (Player)map.creatures.get(i);
@@ -45,15 +45,13 @@ public class GameScreen implements Screen {
 			infoString = "Loaded map from save file '" + map.name + MapManager.FILE_EXTENSION + "'.";
 		}
 	}
-	
-	@Override
+
 	public void display(AsciiPanel terminal){
 		displayTiles(terminal);
 		displayCreatures(terminal);
 		terminal.write(infoString, 0, Game.HEIGHT - 1);
 	}
-	
-	@Override
+
 	public Screen respondToInput(KeyEvent key){
 		switch(key.getKeyCode()){
 		case KeyEvent.VK_UP:
@@ -80,7 +78,7 @@ public class GameScreen implements Screen {
 			infoString = "Saved map to save file '" + map.name + MapManager.FILE_EXTENSION + "'.";
 			break;
 		}
-		
+
 		return this;
 	}
 
@@ -91,25 +89,25 @@ public class GameScreen implements Screen {
 	}
 
 	private void displayTiles(AsciiPanel terminal){
-	    for (int x = 0; x < Game.WIDTH; x++){
-	        for (int y = 0; y < Game.HEIGHT; y++){
-	            int wx = x + scrollX;
-	            int wy = y + scrollY;
-	            
-	            Tile t = map.tileAt(wx, wy);
-	            if(t != null)
-	            	terminal.write(t.glyph, x, y, t.color);
-	        }
-	    }
+		for (int x = 0; x < Game.WIDTH; x++){
+			for (int y = 0; y < Game.HEIGHT; y++){
+				int wx = x + scrollX;
+				int wy = y + scrollY;
+
+				Tile t = map.tileAt(wx, wy);
+				if(t != null)
+					terminal.write(t.glyph, x, y, t.color);
+			}
+		}
 	}
-	
+
 	private void displayCreatures(AsciiPanel terminal){
 		for(int i = 0; i < map.creatures.size(); i++){
 			Creature c = map.creatures.get(i);
-			
+
 			int drawX = c.getX() - scrollX;
 			int drawY = c.getY() - scrollY;
-			
+
 			if(drawX >= 0 && drawX < Game.WIDTH && drawY >= 0 && drawY < Game.HEIGHT)
 				terminal.write(c.glyph, drawX, drawY, c.color);
 		}
