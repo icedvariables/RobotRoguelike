@@ -1,11 +1,14 @@
 package robotroguelike.tiles;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 import robotroguelike.items.Item;
 import robotroguelike.items.Tier;
 
-public class Tile {
+public class Tile implements Serializable {
+	private static final long serialVersionUID = -268064312409560406L;
+
 	public char glyph;
 	public Color color;
 	public boolean canWalkOver = true;

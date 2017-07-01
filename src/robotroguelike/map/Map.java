@@ -1,5 +1,6 @@
 package robotroguelike.map;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import robotroguelike.creatures.Creature;
@@ -7,7 +8,9 @@ import robotroguelike.items.Item;
 import robotroguelike.tiles.Tile;
 import robotroguelike.tiles.TileFloor;
 
-public class Map {
+public class Map implements Serializable {
+	private static final long serialVersionUID = -3802009101439612931L;
+
 	private Tile[][] tiles;
 	public ArrayList<Creature> creatures = new ArrayList<Creature>();
 	
@@ -18,6 +21,13 @@ public class Map {
 		this.tiles = tiles;
 		this.width = tiles.length;
 		this.height = tiles[0].length;
+	}
+	
+	public Map(Tile[][] tiles, ArrayList<Creature> creatures){
+		this.tiles = tiles;
+		this.width = tiles.length;
+		this.height = tiles[0].length;
+		this.creatures = creatures;
 	}
 	
 	public Tile tileAt(int x, int y){
@@ -45,5 +55,9 @@ public class Map {
 		creatures.add(c);
 		
 		System.out.println(creatures);
+	}
+	
+	public Tile[][] getTiles(){
+		return tiles;
 	}
 }

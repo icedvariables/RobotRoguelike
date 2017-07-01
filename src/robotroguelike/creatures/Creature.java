@@ -1,13 +1,16 @@
 package robotroguelike.creatures;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 import robotroguelike.game.Inventory;
 import robotroguelike.items.Item;
 import robotroguelike.map.Map;
 import robotroguelike.tiles.Tile;
 
-public class Creature extends Tile {
+public class Creature extends Tile implements Serializable {
+	private static final long serialVersionUID = 516739414373036469L;
+
 	public Inventory inventory;
 	public int[] direction = {0, 0};
 	

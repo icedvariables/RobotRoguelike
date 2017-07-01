@@ -1,6 +1,10 @@
 package robotroguelike.items;
 
-public class ItemStack {
+import java.io.Serializable;
+
+public class ItemStack implements Serializable {
+	private static final long serialVersionUID = 5103036811801216338L;
+
 	public boolean selectedInInventory = false;
 	
 	private Item item;

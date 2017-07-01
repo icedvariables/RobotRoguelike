@@ -1,5 +1,6 @@
 package robotroguelike.game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,7 +9,9 @@ import robotroguelike.crafting.CraftingRecipe;
 import robotroguelike.items.Item;
 import robotroguelike.items.ItemStack;
 
-public class Inventory {
+public class Inventory implements Serializable {
+	private static final long serialVersionUID = 6065767716201038002L;
+
 	private List<ItemStack> items;
 	private ItemStack equippedItemStack;
 	

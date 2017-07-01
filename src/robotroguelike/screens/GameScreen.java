@@ -2,6 +2,7 @@ package robotroguelike.screens;
 
 import java.awt.event.KeyEvent;
 
+import asciiPanel.AsciiPanel;
 import robotroguelike.crafting.CraftingManager;
 import robotroguelike.creatures.Creature;
 import robotroguelike.creatures.Directions;
@@ -11,32 +12,44 @@ import robotroguelike.items.ItemIronIngot;
 import robotroguelike.items.ItemStack;
 import robotroguelike.items.ItemStone;
 import robotroguelike.map.Map;
+import robotroguelike.map.MapManager;
 import robotroguelike.map.SimpleMapBuilder;
 import robotroguelike.tiles.Tile;
-import asciiPanel.AsciiPanel;
 
 public class GameScreen implements Screen {
 	private Map map;
 	private Player player;
 	private int scrollX = 0, scrollY = 0;
 
-	public GameScreen(){
-		map = new SimpleMapBuilder(500, 500).build();
-		CraftingManager.addAllCraftingRecipes();
-		player = new Player(map);
-
-		player.inventory.giveItemStack(new ItemStack(new ItemStone(), 25));
-		player.inventory.giveItemStack(new ItemStack(new ItemIronIngot(), 25));
-
-		movePlayerAndScroll(map.width / 2, map.height / 2);
-		map.addCreature(player);
+	public GameScreen(boolean buildMap){
+		if(buildMap){
+			map = new SimpleMapBuilder(500, 500).build();
+			
+			CraftingManager.addAllCraftingRecipes();
+			player = new Player(map);
+	
+			player.inventory.giveItemStack(new ItemStack(new ItemStone(), 25));
+			player.inventory.giveItemStack(new ItemStack(new ItemIronIngot(), 25));
+	
+			movePlayerAndScroll(map.width / 2, map.height / 2);
+			map.addCreature(player);
+		}else{
+			map = MapManager.loadMap("map");
+			
+			for(int i = 0; i < map.creatures.size(); i++){
+				if(map.creatures.get(i) instanceof Player)
+					player = (Player)map.creatures.get(i);
+			}
+		}
 	}
 	
+	@Override
 	public void display(AsciiPanel terminal){
 		displayTiles(terminal);
 		displayCreatures(terminal);
 	}
 	
+	@Override
 	public Screen respondToInput(KeyEvent key){
 		switch(key.getKeyCode()){
 		case KeyEvent.VK_UP:
@@ -58,6 +71,7 @@ public class GameScreen implements Screen {
 		case KeyEvent.VK_I: return new InventoryScreen(this, player.inventory);
 		case KeyEvent.VK_C: return new CraftingScreen(this, player.inventory);
 		case KeyEvent.VK_SPACE: player.dig(player.getX() + player.direction[0], player.getY() + player.direction[1]); break;
+		case KeyEvent.VK_S: MapManager.saveMap(map, "map"); break;
 		}
 		
 		return this;
