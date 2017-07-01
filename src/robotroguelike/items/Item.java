@@ -14,7 +14,7 @@ public class Item implements Serializable {
 
 	// TODO: Implement durability for items.
 
-	public Item(int id, String name, String description, Tier tier, boolean equippable){
+	public Item(int id, String name, String description, Tier tier, boolean equippable) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -22,19 +22,19 @@ public class Item implements Serializable {
 		this.equippable = equippable;
 	}
 
-	public String getName(){
+	public String getName() {
 		return name;
 	}
 
-	public String getDescription(){
+	public String getDescription() {
 		return description;
 	}
 
-	public Tier getTier(){
+	public Tier getTier() {
 		return tier;
 	}
 
-	public boolean isEquippable(){
+	public boolean isEquippable() {
 		return equippable;
 	}
 }

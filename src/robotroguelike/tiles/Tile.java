@@ -15,16 +15,16 @@ public class Tile implements Serializable {
 
 	private Tier tier = Tier.LOW;
 
-	public Tile(char glyph, Color color){
+	public Tile(char glyph, Color color) {
 		this.glyph = glyph;
 		this.color = color;
 	}
 
-	public boolean isDiggableWith(Tier itemTier){
+	public boolean isDiggableWith(Tier itemTier) {
 		return itemTier.number >= tier.number;
 	}
 
-	public Item returnOnDig(){
+	public Item returnOnDig() {
 		return null;
 	}
 }

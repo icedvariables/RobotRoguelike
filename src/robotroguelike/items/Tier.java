@@ -13,8 +13,8 @@ public class Tier implements Serializable {
 	public final int number;
 	public final Color color;
 
-	public Tier(int number, Color color){
-		this.number =  number;
+	public Tier(int number, Color color) {
+		this.number = number;
 		this.color = color;
 	}
 }

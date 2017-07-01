@@ -23,8 +23,8 @@ public class GameScreen implements Screen {
 	private Player player;
 	private int scrollX = 0, scrollY = 0;
 
-	public GameScreen(boolean buildMap){
-		if(buildMap){
+	public GameScreen(boolean buildMap) {
+		if (buildMap) {
 			map = new SimpleMapBuilder(500, 500).build();
 
 			CraftingManager.addAllCraftingRecipes();
@@ -35,25 +35,25 @@ public class GameScreen implements Screen {
 
 			movePlayerAndScroll(map.width / 2, map.height / 2);
 			map.addCreature(player);
-		}else{
+		} else {
 			map = MapManager.loadMap("map");
 
-			for(int i = 0; i < map.creatures.size(); i++){
-				if(map.creatures.get(i) instanceof Player)
-					player = (Player)map.creatures.get(i);
+			for (int i = 0; i < map.creatures.size(); i++) {
+				if (map.creatures.get(i) instanceof Player)
+					player = (Player) map.creatures.get(i);
 			}
 			infoString = "Loaded map from save file '" + map.name + MapManager.FILE_EXTENSION + "'.";
 		}
 	}
 
-	public void display(AsciiPanel terminal){
+	public void display(AsciiPanel terminal) {
 		displayTiles(terminal);
 		displayCreatures(terminal);
 		terminal.write(infoString, 0, Game.HEIGHT - 1);
 	}
 
-	public Screen respondToInput(KeyEvent key){
-		switch(key.getKeyCode()){
+	public Screen respondToInput(KeyEvent key) {
+		switch (key.getKeyCode()) {
 		case KeyEvent.VK_UP:
 			player.direction = Directions.UP;
 			movePlayerAndScroll(0, -1);
@@ -70,9 +70,13 @@ public class GameScreen implements Screen {
 			player.direction = Directions.RIGHT;
 			movePlayerAndScroll(1, 0);
 			break;
-		case KeyEvent.VK_I: return new InventoryScreen(this, player.inventory);
-		case KeyEvent.VK_C: return new CraftingScreen(this, player.inventory);
-		case KeyEvent.VK_SPACE: player.dig(player.getX() + player.direction[0], player.getY() + player.direction[1]); break;
+		case KeyEvent.VK_I:
+			return new InventoryScreen(this, player.inventory);
+		case KeyEvent.VK_C:
+			return new CraftingScreen(this, player.inventory);
+		case KeyEvent.VK_SPACE:
+			player.dig(player.getX() + player.direction[0], player.getY() + player.direction[1]);
+			break;
 		case KeyEvent.VK_S:
 			MapManager.saveMap(map);
 			infoString = "Saved map to save file '" + map.name + MapManager.FILE_EXTENSION + "'.";
@@ -82,33 +86,33 @@ public class GameScreen implements Screen {
 		return this;
 	}
 
-	private void movePlayerAndScroll(int moveX, int moveY){
+	private void movePlayerAndScroll(int moveX, int moveY) {
 		player.moveBy(moveX, moveY);
 		scrollX = player.getX() - (Game.WIDTH / 2);
 		scrollY = player.getY() - (Game.HEIGHT / 2);
 	}
 
-	private void displayTiles(AsciiPanel terminal){
-		for (int x = 0; x < Game.WIDTH; x++){
-			for (int y = 0; y < Game.HEIGHT; y++){
+	private void displayTiles(AsciiPanel terminal) {
+		for (int x = 0; x < Game.WIDTH; x++) {
+			for (int y = 0; y < Game.HEIGHT; y++) {
 				int wx = x + scrollX;
 				int wy = y + scrollY;
 
 				Tile t = map.tileAt(wx, wy);
-				if(t != null)
+				if (t != null)
 					terminal.write(t.glyph, x, y, t.color);
 			}
 		}
 	}
 
-	private void displayCreatures(AsciiPanel terminal){
-		for(int i = 0; i < map.creatures.size(); i++){
+	private void displayCreatures(AsciiPanel terminal) {
+		for (int i = 0; i < map.creatures.size(); i++) {
 			Creature c = map.creatures.get(i);
 
 			int drawX = c.getX() - scrollX;
 			int drawY = c.getY() - scrollY;
 
-			if(drawX >= 0 && drawX < Game.WIDTH && drawY >= 0 && drawY < Game.HEIGHT)
+			if (drawX >= 0 && drawX < Game.WIDTH && drawY >= 0 && drawY < Game.HEIGHT)
 				terminal.write(c.glyph, drawX, drawY, c.color);
 		}
 	}
