@@ -25,7 +25,9 @@ public class Creature extends Tile implements Serializable {
 	}
 
 	public void dig(int wx, int wy){
-		Item returnItem = map.dig(wx, wy, inventory.getEquippedItemStack().getItem());
+		Item returnItem = null;
+		if(inventory.getEquippedItemStack() != null)
+			returnItem = map.dig(wx, wy, inventory.getEquippedItemStack().getItem());
 		if(returnItem != null)
 			inventory.giveItem(returnItem);
 	}
