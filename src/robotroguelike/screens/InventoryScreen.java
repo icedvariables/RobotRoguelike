@@ -39,7 +39,7 @@ public class InventoryScreen implements Screen {
 			terminal.write(itm.getName(), OFFSET_X + 8, OFFSET_Y + 3 + i, itm.getTier().color);
 			terminal.write(itm.getDescription(), OFFSET_X + 8 + DESCRIPTION_OFFSET, OFFSET_Y + 3 + i);
 			
-			if(i == inventory.getEquippedItemIndex())
+			if(items[i] == inventory.getEquippedItemStack())
 				terminal.write("(equipped)", EQUIPPED_OFFSET, OFFSET_Y + 3 + i, Color.RED);
 			if(items[i].selectedInInventory)
 				terminal.write("(selected)", SELECTED_OFFSET, OFFSET_Y + 3 + i, Color.GREEN);

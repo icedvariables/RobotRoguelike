@@ -22,7 +22,7 @@ public class Creature extends Tile {
 	}
 	
 	public void dig(int wx, int wy){
-		Item returnItem = map.dig(wx, wy, inventory.getEquippedItem());
+		Item returnItem = map.dig(wx, wy, inventory.getEquippedItemStack().getItem());
 		if(returnItem != null)
 			inventory.giveItem(returnItem);
 	}

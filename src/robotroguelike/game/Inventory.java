@@ -9,13 +9,11 @@ import robotroguelike.items.Item;
 import robotroguelike.items.ItemStack;
 
 public class Inventory {
-	public static final int NO_EQUIPPED_ITEM = -1;
-
 	private List<ItemStack> items;
-	private int equippedItemIndex = NO_EQUIPPED_ITEM; // The index for the currently equipped item.
+	private ItemStack equippedItemStack;
 	
 	public Inventory(){
-		// TODO: Make inventory have a maximum size.
+		// TODO: Make inventory have a maximum size/weight restriction.
 		items = new ArrayList<ItemStack>();
 	}
 	
@@ -55,15 +53,8 @@ public class Inventory {
 		items.add(stack);
 	}
 	
-	public Item getEquippedItem(){
-		if(equippedItemIndex != NO_EQUIPPED_ITEM)
-			return items.get(equippedItemIndex).getItem();
-		
-		return null;
-	}
-	
-	public int getEquippedItemIndex(){
-		return equippedItemIndex;
+	public ItemStack getEquippedItemStack(){
+		return equippedItemStack;
 	}
 	
 	public ItemStack[] getSelectedItems(){
@@ -79,10 +70,14 @@ public class Inventory {
 	
 	public boolean equipItem(int i){
 		if(i < items.size() && i > 0 && items.get(i).getItem().isEquippable()){
-			equippedItemIndex = i;
+			equippedItemStack = items.get(i);
 			return true;
 		}
 		return false;
+	}
+	
+	public void equipItem(ItemStack i){
+		equippedItemStack = i;
 	}
 	
 	public boolean consumeItems(ItemStack[] stacks){
