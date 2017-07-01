@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import robotroguelike.creatures.Creature;
 import robotroguelike.items.Item;
 import robotroguelike.tiles.Tile;
-import robotroguelike.tiles.TileFloor;
 
 public class Map implements Serializable {
 	private static final long serialVersionUID = -3802009101439612931L;
@@ -47,7 +46,7 @@ public class Map implements Serializable {
 		if (item != null && tile != null && tile.isDiggableWith(item.getTier())) {
 			returnItem = tile.returnOnDig();
 
-			tiles[x][y] = new TileFloor();
+			tiles[x][y] = null;
 		}
 
 		return returnItem;

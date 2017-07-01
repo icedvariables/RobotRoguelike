@@ -35,7 +35,7 @@ public class Creature extends Tile implements Serializable {
 	public boolean moveBy(int mx, int my) {
 		Tile t = map.tileAt(x + mx, y + my);
 
-		if (t != null && t.canWalkOver) {
+		if (t == null || t.canWalkOver) {
 			x += mx;
 			y += my;
 			return true;
