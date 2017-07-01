@@ -2,6 +2,6 @@ package robotroguelike.items;
 
 public class ItemIronIngot extends Item {
 	public ItemIronIngot(){
-		super(2, "Iron Ingot", "A lump of pure iron.", Tier.MEDIUM, false);
+		super(ItemIds.IRON_INGOT, "Iron Ingot", "A lump of pure iron.", Tier.MEDIUM, false);
 	}
 }

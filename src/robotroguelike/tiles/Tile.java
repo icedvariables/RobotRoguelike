@@ -10,7 +10,6 @@ public class Tile {
 	public Color color;
 	public boolean canWalkOver = true;
 
-	private Item correspondingItem;
 	private Tier tier = Tier.LOW;
 	
 	public Tile(char glyph, Color color){
@@ -18,15 +17,11 @@ public class Tile {
 		this.color = color;
 	}
 	
-	public boolean isDiggable(Tier itemTier){
+	public boolean isDiggableWith(Tier itemTier){
 		return itemTier.number >= tier.number;
 	}
 	
 	public Item returnOnDig(){
-		return correspondingItem;
-	}
-	
-	public void setCorrespondingItem(Item i){
-		correspondingItem = i;
+		return null;
 	}
 }

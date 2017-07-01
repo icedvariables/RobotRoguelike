@@ -3,11 +3,13 @@ package robotroguelike.creatures;
 import java.awt.Color;
 
 import robotroguelike.game.Inventory;
+import robotroguelike.items.Item;
 import robotroguelike.map.Map;
 import robotroguelike.tiles.Tile;
 
 public class Creature extends Tile {
 	public Inventory inventory;
+	public int[] direction = {0, 0};
 	
 	protected int x, y;
 	
@@ -20,16 +22,19 @@ public class Creature extends Tile {
 	}
 	
 	public void dig(int wx, int wy){
-		map.dig(wx, wy, inventory.getEquippedItem());
+		Item returnItem = map.dig(wx, wy, inventory.getEquippedItem());
+		inventory.giveItem(returnItem);
 	}
 	
 	public boolean moveBy(int mx, int my){
 		Tile t = map.tileAt(x + mx, y + my);
+		
 		if(t != null && t.canWalkOver){
 			x += mx;
 			y += my;
 			return true;
 		}
+		
 		return false;
 	}
 	

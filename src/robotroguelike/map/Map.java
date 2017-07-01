@@ -30,8 +30,10 @@ public class Map {
 	public Item dig(int x, int y, Item item){
 		Item returnItem = null;
 		
-		if(tileAt(x, y).isDiggable(item.getTier())){
-			returnItem = tileAt(x, y).returnOnDig();
+		Tile tile = tileAt(x, y);
+		
+		if(item != null && tile != null && tile.isDiggableWith(item.getTier())){
+			returnItem = tile.returnOnDig();
 			
 			tiles[x][y] = new TileFloor();
 		}

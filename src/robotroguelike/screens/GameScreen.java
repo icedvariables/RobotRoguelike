@@ -2,8 +2,11 @@ package robotroguelike.screens;
 
 import java.awt.event.KeyEvent;
 
+import com.sun.javafx.scene.traversal.Direction;
+
 import robotroguelike.crafting.CraftingManager;
 import robotroguelike.creatures.Creature;
+import robotroguelike.creatures.Directions;
 import robotroguelike.creatures.Player;
 import robotroguelike.game.Game;
 import robotroguelike.items.ItemIronIngot;
@@ -37,12 +40,25 @@ public class GameScreen implements Screen {
 	
 	public Screen respondToInput(KeyEvent key){
 		switch(key.getKeyCode()){
-		case KeyEvent.VK_UP: movePlayerAndScroll(0, -1); break;
-		case KeyEvent.VK_DOWN: movePlayerAndScroll(0, 1); break;
-		case KeyEvent.VK_LEFT: movePlayerAndScroll(-1, 0); break;
-		case KeyEvent.VK_RIGHT: movePlayerAndScroll(1, 0); break;
+		case KeyEvent.VK_UP:
+			player.direction = Directions.UP;
+			movePlayerAndScroll(0, -1);
+			break;
+		case KeyEvent.VK_DOWN:
+			player.direction = Directions.DOWN;
+			movePlayerAndScroll(0, 1);
+			break;
+		case KeyEvent.VK_LEFT:
+			player.direction = Directions.LEFT;
+			movePlayerAndScroll(-1, 0);
+			break;
+		case KeyEvent.VK_RIGHT:
+			player.direction = Directions.RIGHT;
+			movePlayerAndScroll(1, 0);
+			break;
 		case KeyEvent.VK_I: return new InventoryScreen(this, player.inventory);
 		case KeyEvent.VK_C: return new CraftingScreen(this, player.inventory);
+		case KeyEvent.VK_SPACE: player.dig(player.getX() + player.direction[0], player.getY() + player.direction[1]); break;
 		}
 		
 		return this;
