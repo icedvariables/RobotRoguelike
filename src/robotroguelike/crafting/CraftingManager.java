@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import robotroguelike.items.Item;
+import robotroguelike.items.ItemCopperCable;
+import robotroguelike.items.ItemCopperIngot;
 import robotroguelike.items.ItemIronIngot;
+import robotroguelike.items.ItemIronPickaxe;
 import robotroguelike.items.ItemStack;
 import robotroguelike.items.ItemStone;
 import robotroguelike.items.ItemStoneHandle;
@@ -13,10 +16,14 @@ public class CraftingManager {
 	private static final List<CraftingRecipe> recipes = new ArrayList<CraftingRecipe>();
 
 	public static void addAllCraftingRecipes() {
-		addCraftingRecipe(
-				new CraftingRecipe(new ItemStoneHandle(), new ItemStack[] { new ItemStack(new ItemStone(), 3) }));
+		addCraftingRecipe(new CraftingRecipe(new ItemStoneHandle(),
+				new ItemStack[] { new ItemStack(new ItemStone(), 3) }));
+
 		addCraftingRecipe(new CraftingRecipe(new ItemIronPickaxe(),
 				new ItemStack[] { new ItemStack(new ItemStoneHandle(), 1), new ItemStack(new ItemIronIngot(), 5) }));
+
+		addCraftingRecipe(new CraftingRecipe(new ItemCopperCable(),
+				new ItemStack[] { new ItemStack(new ItemCopperIngot(), 1) }));
 	}
 
 	public static CraftingRecipe addCraftingRecipe(CraftingRecipe recipe) {

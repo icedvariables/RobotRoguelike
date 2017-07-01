@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Item implements Serializable {
 	private static final long serialVersionUID = -5818639862963916760L;
 
-	public final int id;
+	public final ItemId id;
 
 	private String name = "Item";
 	private String description = "An item.";
@@ -14,7 +14,7 @@ public class Item implements Serializable {
 
 	// TODO: Implement durability for items.
 
-	public Item(int id, String name, String description, Tier tier, boolean equippable) {
+	public Item(ItemId id, String name, String description, Tier tier, boolean equippable) {
 		this.id = id;
 		this.name = name;
 		this.description = description;

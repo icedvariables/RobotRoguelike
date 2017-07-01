@@ -8,6 +8,7 @@ import robotroguelike.creatures.Creature;
 import robotroguelike.creatures.Directions;
 import robotroguelike.creatures.Player;
 import robotroguelike.game.Game;
+import robotroguelike.items.ItemCopperIngot;
 import robotroguelike.items.ItemIronIngot;
 import robotroguelike.items.ItemStack;
 import robotroguelike.items.ItemStone;
@@ -39,6 +40,7 @@ public class GameScreen implements Screen {
 
 		player.inventory.giveItemStack(new ItemStack(new ItemStone(), 25));
 		player.inventory.giveItemStack(new ItemStack(new ItemIronIngot(), 25));
+		player.inventory.giveItemStack(new ItemStack(new ItemCopperIngot(), 25));
 
 		movePlayerAndScroll(map.width / 2, map.height / 2);
 		map.addCreature(player);
