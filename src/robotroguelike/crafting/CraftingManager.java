@@ -9,13 +9,18 @@ import java.util.Set;
 import robotroguelike.items.Item;
 import robotroguelike.items.ItemIronIngot;
 import robotroguelike.items.ItemStack;
+import robotroguelike.items.ItemStone;
+import robotroguelike.items.ItemStoneHandle;
 import robotroguelike.items.ItemTest;
 
 public class CraftingManager {
 	private static final List<CraftingRecipe> recipes = new ArrayList<CraftingRecipe>();
 	
 	public static void addAllCraftingRecipes(){
-		addCraftingRecipe(new CraftingRecipe(new ItemTest(), new ItemStack[]{new ItemStack(new ItemIronIngot(), 2)}));
+		addCraftingRecipe(new CraftingRecipe(new ItemStoneHandle(),
+				new ItemStack[]{new ItemStack(new ItemStone(), 3)}));
+		addCraftingRecipe(new CraftingRecipe(new ItemIronPickaxe(),
+				new ItemStack[]{new ItemStack(new ItemStoneHandle(), 1), new ItemStack(new ItemIronIngot(), 5)}));
 	}
 
 	public static CraftingRecipe addCraftingRecipe(CraftingRecipe recipe){

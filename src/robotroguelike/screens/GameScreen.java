@@ -11,6 +11,7 @@ import robotroguelike.creatures.Player;
 import robotroguelike.game.Game;
 import robotroguelike.items.ItemIronIngot;
 import robotroguelike.items.ItemStack;
+import robotroguelike.items.ItemStone;
 import robotroguelike.map.Map;
 import robotroguelike.map.SimpleMapBuilder;
 import robotroguelike.tiles.Tile;
@@ -26,8 +27,8 @@ public class GameScreen implements Screen {
 		CraftingManager.addAllCraftingRecipes();
 		player = new Player(map);
 
-		player.inventory.giveItemStack(new ItemStack(new ItemIronIngot(), 50));
-		player.inventory.giveItem(new ItemIronIngot());
+		player.inventory.giveItemStack(new ItemStack(new ItemStone(), 25));
+		player.inventory.giveItemStack(new ItemStack(new ItemIronIngot(), 25));
 
 		movePlayerAndScroll(map.width / 2, map.height / 2);
 		map.addCreature(player);
