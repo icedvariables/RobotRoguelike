@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 
 import asciiPanel.AsciiPanel;
+import robotroguelike.crafting.CraftingManager;
 import robotroguelike.screens.MainMenuScreen;
 import robotroguelike.screens.Screen;
 
@@ -28,6 +29,8 @@ public class Game extends JFrame implements KeyListener {
 		terminal.setDefaultForegroundColor(Color.WHITE);
 		add(terminal);
 		pack();
+
+		CraftingManager.addAllCraftingRecipes();
 
 		screen = new MainMenuScreen();
 		addKeyListener(this);

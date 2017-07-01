@@ -3,7 +3,6 @@ package robotroguelike.screens;
 import java.awt.event.KeyEvent;
 
 import asciiPanel.AsciiPanel;
-import robotroguelike.crafting.CraftingManager;
 import robotroguelike.creatures.Creature;
 import robotroguelike.creatures.Directions;
 import robotroguelike.creatures.Player;
@@ -35,7 +34,6 @@ public class GameScreen implements Screen {
 	private void buildNewMap() {
 		map = new SimpleMapBuilder(500, 500).build();
 
-		CraftingManager.addAllCraftingRecipes();
 		player = new Player(map);
 
 		player.inventory.giveItemStack(new ItemStack(new ItemStone(), 25));
