@@ -131,6 +131,16 @@ public class Inventory {
 		return false;
 	}
 	
+	@Override
+	public String toString(){
+		String str = "";
+		for(int i = 0; i < items.size(); i++){
+			str += items.get(i).toString();
+			str += (i + 1) == items.size() ? "." : ", "; // Add commas to separate items in the list.
+		}
+		return str;
+	}
+	
 	public void toggleItemSelection(int i){
 		items.get(i).selectedInInventory = !items.get(i).selectedInInventory;
 	}
