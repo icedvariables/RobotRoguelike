@@ -2,8 +2,6 @@ package robotroguelike.screens;
 
 import java.awt.event.KeyEvent;
 
-import com.sun.javafx.scene.traversal.Direction;
-
 import robotroguelike.crafting.CraftingManager;
 import robotroguelike.creatures.Creature;
 import robotroguelike.creatures.Directions;

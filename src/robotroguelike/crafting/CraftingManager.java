@@ -1,17 +1,13 @@
 package robotroguelike.crafting;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import robotroguelike.items.Item;
 import robotroguelike.items.ItemIronIngot;
 import robotroguelike.items.ItemStack;
 import robotroguelike.items.ItemStone;
 import robotroguelike.items.ItemStoneHandle;
-import robotroguelike.items.ItemTest;
 
 public class CraftingManager {
 	private static final List<CraftingRecipe> recipes = new ArrayList<CraftingRecipe>();

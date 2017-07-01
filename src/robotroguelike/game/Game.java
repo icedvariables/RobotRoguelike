@@ -32,20 +32,24 @@ public class Game extends JFrame implements KeyListener {
 		repaint();
 	}
 	
+	@Override
 	public void repaint(){
 		terminal.clear();
 		screen.display(terminal);
 		super.repaint();
 	}
 	
+	@Override
 	public void keyPressed(KeyEvent e){
         screen = screen.respondToInput(e);
         repaint();
     }
 	
+	@Override
 	public void keyReleased(KeyEvent e){}
 
-    public void keyTyped(KeyEvent e){}
+    @Override
+	public void keyTyped(KeyEvent e){}
 	
 	public static void main(String[] args){
         Game app = new Game();
