@@ -16,14 +16,14 @@ public class CraftingManager {
 	private static final List<CraftingRecipe> recipes = new ArrayList<CraftingRecipe>();
 
 	public static void addAllCraftingRecipes() {
-		addCraftingRecipe(
-				new CraftingRecipe(new ItemStoneHandle(), new ItemStack[] { new ItemStack(new ItemStone(), 3) }));
+		addCraftingRecipe(new CraftingRecipe(new ItemStoneHandle(),
+				new ItemStack[] { new ItemStack(new ItemStone(), 3) }));
 
 		addCraftingRecipe(new CraftingRecipe(new ItemIronPickaxe(),
 				new ItemStack[] { new ItemStack(new ItemStoneHandle(), 1), new ItemStack(new ItemIronIngot(), 5) }));
 
-		addCraftingRecipe(
-				new CraftingRecipe(new ItemCopperCable(), new ItemStack[] { new ItemStack(new ItemCopperIngot(), 1) }));
+		addCraftingRecipe(new CraftingRecipe(new ItemCopperCable(),
+				new ItemStack[] { new ItemStack(new ItemCopperIngot(), 1) }));
 	}
 
 	public static CraftingRecipe addCraftingRecipe(CraftingRecipe recipe) {

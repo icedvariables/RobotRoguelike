@@ -84,6 +84,8 @@ public class Inventory implements Serializable {
 	}
 
 	public boolean consumeItems(ItemStack[] stacks) {
+		// TODO: Improve this code/redo crafting implementation.
+
 		if (!hasItems(stacks))
 			return false;
 
