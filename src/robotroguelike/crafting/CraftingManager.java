@@ -6,8 +6,11 @@ import java.util.List;
 import robotroguelike.items.Item;
 import robotroguelike.items.ItemCopperCable;
 import robotroguelike.items.ItemCopperIngot;
+import robotroguelike.items.ItemElectronicCircuit;
+import robotroguelike.items.ItemIronCog;
 import robotroguelike.items.ItemIronIngot;
 import robotroguelike.items.ItemIronPickaxe;
+import robotroguelike.items.ItemSimpleEngine;
 import robotroguelike.items.ItemStack;
 import robotroguelike.items.ItemStone;
 import robotroguelike.items.ItemStoneHandle;
@@ -24,6 +27,15 @@ public class CraftingManager {
 
 		addCraftingRecipe(new CraftingRecipe(new ItemCopperCable(),
 				new ItemStack[] { new ItemStack(new ItemCopperIngot(), 1) }));
+
+		addCraftingRecipe(new CraftingRecipe(new ItemElectronicCircuit(),
+				new ItemStack[] { new ItemStack(new ItemCopperCable(), 3), new ItemStack(new ItemIronIngot(), 1) }));
+
+		addCraftingRecipe(new CraftingRecipe(new ItemIronCog(),
+				new ItemStack[] { new ItemStack(new ItemIronIngot(), 2) }));
+		
+		addCraftingRecipe(new CraftingRecipe(new ItemSimpleEngine(),
+				new ItemStack[] { new ItemStack(new ItemIronCog(), 2), new ItemStack(new ItemElectronicCircuit(), 1), new ItemStack(new ItemCopperCable(), 2), new ItemStack(new ItemIronIngot(), 4) }));
 	}
 
 	public static CraftingRecipe addCraftingRecipe(CraftingRecipe recipe) {

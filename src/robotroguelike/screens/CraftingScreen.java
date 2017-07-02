@@ -40,7 +40,7 @@ public class CraftingScreen implements Screen {
 			ItemStack[] ingredients = recipes[i].ingredients;
 
 			graphics.drawText(item.getName(), OFFSET_X + 3, OFFSET_Y + 3 + i, item.getTier().color);
-			graphics.drawText(generateIngredientsString(ingredients), INGREDIENTS_OFFSET, OFFSET_Y + 3 + i);
+			graphics.drawText(generateIngredientsString(ingredients), OFFSET_X + 3 + INGREDIENTS_OFFSET, OFFSET_Y + 3 + i);
 		}
 
 		// Selector:
@@ -48,7 +48,11 @@ public class CraftingScreen implements Screen {
 			graphics.drawChar((char) 223, OFFSET_X, OFFSET_Y + 3 + selectorIndex, Color.WHITE);
 
 		// Mini inventory:
-		graphics.drawText("Inventory: " + inventory.toString(), OFFSET_X, INVENTORY_OFFSET);
+		String inventoryStr = "Inventory: " + inventory.toString();
+		if(inventoryStr.length() > Game.WIDTH)
+			graphics.drawText(inventoryStr.substring(0, Game.WIDTH - 4 - OFFSET_X) + "...", OFFSET_X, INVENTORY_OFFSET);
+		else
+			graphics.drawText(inventoryStr, OFFSET_X, INVENTORY_OFFSET);
 	}
 
 	public boolean craftItem(int index) {
