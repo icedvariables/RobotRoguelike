@@ -3,10 +3,10 @@ package robotroguelike.screens;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 
-import asciiPanel.AsciiPanel;
 import robotroguelike.crafting.CraftingManager;
 import robotroguelike.crafting.CraftingRecipe;
 import robotroguelike.game.Game;
+import robotroguelike.game.GraphicsEngine;
 import robotroguelike.game.Inventory;
 import robotroguelike.items.Item;
 import robotroguelike.items.ItemStack;
@@ -24,30 +24,31 @@ public class CraftingScreen implements Screen {
 		this.inventory = inventory;
 	}
 
-	public void display(AsciiPanel terminal) {
-		terminal.write("Crafting", OFFSET_X, OFFSET_Y);
-		terminal.write("--------", OFFSET_X, OFFSET_Y + 1);
+	@Override
+	public void display(GraphicsEngine graphics) {
+		graphics.drawText("Crafting", OFFSET_X, OFFSET_Y);
+		graphics.drawText("--------", OFFSET_X, OFFSET_Y + 1);
 
-		displayCraftingList(terminal);
+		displayCraftingList(graphics);
 	}
 
-	public void displayCraftingList(AsciiPanel terminal) {
+	public void displayCraftingList(GraphicsEngine graphics) {
 		CraftingRecipe[] recipes = CraftingManager.getRecipes();
 
 		for (int i = 0; i < recipes.length; i++) {
 			Item item = recipes[i].item;
 			ItemStack[] ingredients = recipes[i].ingredients;
 
-			terminal.write(item.getName(), OFFSET_X + 3, OFFSET_Y + 3 + i, item.getTier().color);
-			terminal.write(generateIngredientsString(ingredients), INGREDIENTS_OFFSET, OFFSET_Y + 3 + i);
+			graphics.drawText(item.getName(), OFFSET_X + 3, OFFSET_Y + 3 + i, item.getTier().color);
+			graphics.drawText(generateIngredientsString(ingredients), INGREDIENTS_OFFSET, OFFSET_Y + 3 + i);
 		}
 
 		// Selector:
 		if (recipes.length > 0)
-			terminal.write((char) 223, OFFSET_X, OFFSET_Y + 3 + selectorIndex, Color.WHITE);
+			graphics.drawChar((char) 223, OFFSET_X, OFFSET_Y + 3 + selectorIndex, Color.WHITE);
 
 		// Mini inventory:
-		terminal.write("Inventory: " + inventory.toString(), OFFSET_X, INVENTORY_OFFSET);
+		graphics.drawText("Inventory: " + inventory.toString(), OFFSET_X, INVENTORY_OFFSET);
 	}
 
 	public boolean craftItem(int index) {
@@ -63,6 +64,7 @@ public class CraftingScreen implements Screen {
 		return str;
 	}
 
+	@Override
 	public Screen respondToInput(KeyEvent key) {
 		switch (key.getKeyCode()) {
 		case KeyEvent.VK_ESCAPE:

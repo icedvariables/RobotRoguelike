@@ -20,14 +20,15 @@ public class Game extends JFrame implements KeyListener {
 	public static final int HEIGHT = 36;
 	// public static final int DEFAULT_ITEM_STACK_MAX_QUANTITY = 50;
 
-	private AsciiPanel terminal;
+	private GraphicsEngine graphics;
 	private Screen screen;
 
 	public Game() {
 		super();
-		terminal = new AsciiPanel(WIDTH, HEIGHT);
+		AsciiPanel terminal = new AsciiPanel(WIDTH, HEIGHT);
 		terminal.setDefaultForegroundColor(Color.WHITE);
 		add(terminal);
+		graphics = new GraphicsEngineAscii(terminal);
 		pack();
 
 		CraftingManager.addAllCraftingRecipes();
@@ -39,19 +40,22 @@ public class Game extends JFrame implements KeyListener {
 
 	@Override
 	public void repaint() {
-		terminal.clear();
-		screen.display(terminal);
+		graphics.clear();
+		screen.display(graphics);
 		super.repaint();
 	}
 
+	@Override
 	public void keyPressed(KeyEvent e) {
 		screen = screen.respondToInput(e);
 		repaint();
 	}
 
+	@Override
 	public void keyReleased(KeyEvent e) {
 	}
 
+	@Override
 	public void keyTyped(KeyEvent e) {
 	}
 

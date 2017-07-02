@@ -2,11 +2,11 @@ package robotroguelike.screens;
 
 import java.awt.event.KeyEvent;
 
-import asciiPanel.AsciiPanel;
 import robotroguelike.creatures.Creature;
 import robotroguelike.creatures.Directions;
 import robotroguelike.creatures.Player;
 import robotroguelike.game.Game;
+import robotroguelike.game.GraphicsEngine;
 import robotroguelike.items.ItemCopperIngot;
 import robotroguelike.items.ItemIronIngot;
 import robotroguelike.items.ItemStack;
@@ -54,13 +54,15 @@ public class GameScreen implements Screen {
 		infoString = "Loaded map from save file '" + map.name + MapManager.FILE_EXTENSION + "'.";
 	}
 
-	public void display(AsciiPanel terminal) {
-		displayTiles(terminal);
-		displayCreatures(terminal);
-		terminal.write(infoString, 0, Game.HEIGHT - 1);
-		terminal.write("Version: " + Game.VERSION, 0, 0);
+	@Override
+	public void display(GraphicsEngine graphics) {
+		displayTiles(graphics);
+		displayCreatures(graphics);
+		graphics.drawText(infoString, 0, Game.HEIGHT - 1);
+		graphics.drawText("Version: " + Game.VERSION, 0, 0);
 	}
 
+	@Override
 	public Screen respondToInput(KeyEvent key) {
 		switch (key.getKeyCode()) {
 		case KeyEvent.VK_UP:
@@ -101,7 +103,7 @@ public class GameScreen implements Screen {
 		scrollY = player.getY() - (Game.HEIGHT / 2);
 	}
 
-	private void displayTiles(AsciiPanel terminal) {
+	private void displayTiles(GraphicsEngine graphics) {
 		for (int x = 0; x < Game.WIDTH; x++) {
 			for (int y = 0; y < Game.HEIGHT; y++) {
 				int wx = x + scrollX;
@@ -109,12 +111,12 @@ public class GameScreen implements Screen {
 
 				Tile t = map.tileAt(wx, wy);
 				if (t != null)
-					terminal.write(t.glyph, x, y, t.color);
+					graphics.drawTile(t, x, y);
 			}
 		}
 	}
 
-	private void displayCreatures(AsciiPanel terminal) {
+	private void displayCreatures(GraphicsEngine graphics) {
 		for (int i = 0; i < map.creatures.size(); i++) {
 			Creature c = map.creatures.get(i);
 
@@ -122,7 +124,7 @@ public class GameScreen implements Screen {
 			int drawY = c.getY() - scrollY;
 
 			if (drawX >= 0 && drawX < Game.WIDTH && drawY >= 0 && drawY < Game.HEIGHT)
-				terminal.write(c.glyph, drawX, drawY, c.color);
+				graphics.drawTile(c, drawX, drawY);
 		}
 	}
 }

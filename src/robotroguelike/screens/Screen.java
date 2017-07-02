@@ -2,10 +2,10 @@ package robotroguelike.screens;
 
 import java.awt.event.KeyEvent;
 
-import asciiPanel.AsciiPanel;
+import robotroguelike.game.GraphicsEngine;
 
 public interface Screen {
-	public void display(AsciiPanel terminal);
+	public void display(GraphicsEngine graphics);
 
 	public Screen respondToInput(KeyEvent key);
 }

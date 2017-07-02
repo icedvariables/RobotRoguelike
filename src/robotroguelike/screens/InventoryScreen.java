@@ -3,8 +3,8 @@ package robotroguelike.screens;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 
-import asciiPanel.AsciiPanel;
 import robotroguelike.game.Game;
+import robotroguelike.game.GraphicsEngine;
 import robotroguelike.game.Inventory;
 import robotroguelike.items.Item;
 import robotroguelike.items.ItemStack;
@@ -23,34 +23,36 @@ public class InventoryScreen implements Screen {
 		this.inventory = inventory;
 	}
 
-	public void display(AsciiPanel terminal) {
-		terminal.write("Inventory", OFFSET_X, OFFSET_Y);
-		terminal.write("---------", OFFSET_X, OFFSET_Y + 1);
+	@Override
+	public void display(GraphicsEngine graphics) {
+		graphics.drawText("Inventory", OFFSET_X, OFFSET_Y);
+		graphics.drawText("---------", OFFSET_X, OFFSET_Y + 1);
 
-		displayItems(terminal);
+		displayItems(graphics);
 	}
 
-	private void displayItems(AsciiPanel terminal) {
+	private void displayItems(GraphicsEngine graphics) {
 		ItemStack[] items = inventory.getItems();
 
 		for (int i = 0; i < items.length; i++) {
 			Item itm = items[i].getItem();
 
-			terminal.write(items[i].getQuantity() + " x ", OFFSET_X + 3, OFFSET_Y + 3 + i);
-			terminal.write(itm.getName(), OFFSET_X + 8, OFFSET_Y + 3 + i, itm.getTier().color);
-			terminal.write(itm.getDescription(), OFFSET_X + 8 + DESCRIPTION_OFFSET, OFFSET_Y + 3 + i);
+			graphics.drawText(items[i].getQuantity() + " x ", OFFSET_X + 3, OFFSET_Y + 3 + i);
+			graphics.drawText(itm.getName(), OFFSET_X + 8, OFFSET_Y + 3 + i, itm.getTier().color);
+			graphics.drawText(itm.getDescription(), OFFSET_X + 8 + DESCRIPTION_OFFSET, OFFSET_Y + 3 + i);
 
 			if (items[i] == inventory.getEquippedItemStack())
-				terminal.write("(equipped)", EQUIPPED_OFFSET, OFFSET_Y + 3 + i, Color.RED);
+				graphics.drawText("(equipped)", EQUIPPED_OFFSET, OFFSET_Y + 3 + i, Color.RED);
 			if (items[i].selectedInInventory)
-				terminal.write("(selected)", SELECTED_OFFSET, OFFSET_Y + 3 + i, Color.GREEN);
+				graphics.drawText("(selected)", SELECTED_OFFSET, OFFSET_Y + 3 + i, Color.GREEN);
 		}
 
 		// Selector:
 		if (!inventory.isEmpty())
-			terminal.write((char) 223, OFFSET_X, OFFSET_Y + 3 + selectorIndex, Color.WHITE);
+			graphics.drawChar((char) 223, OFFSET_X, OFFSET_Y + 3 + selectorIndex, Color.WHITE);
 	}
 
+	@Override
 	public Screen respondToInput(KeyEvent key) {
 		switch (key.getKeyCode()) {
 		case KeyEvent.VK_ESCAPE:
