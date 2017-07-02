@@ -13,12 +13,18 @@ public class SimpleMapBuilder implements MapBuilder {
 		this.tiles = new Tile[width][height];
 	}
 
+	public SimpleMapBuilder(int width, int height, long seed) {
+		this.width = width;
+		this.height = height;
+		this.tiles = new Tile[width][height];
+		rand.setSeed(seed);
+	}
+
 	private void randomise() {
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
-				double rand = Math.random();
 
-				tiles[x][y] = rand < 0.7 ? null : new TileStone();
+				tiles[x][y] = rand.nextDouble() < 0.7 ? null : new TileStone();
 			}
 		}
 	}
