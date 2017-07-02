@@ -7,7 +7,7 @@ import robotroguelike.items.ItemIronIngot;
 
 public class TileIronOre extends Tile {
 	public TileIronOre() {
-		super(TileId.IRON_ORE, (char) 177, Color.GRAY, false);
+		super(TileId.IRON_ORE, (char) 176, Color.GRAY, false);
 	}
 
 	@Override
