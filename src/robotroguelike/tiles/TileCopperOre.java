@@ -7,7 +7,7 @@ import robotroguelike.items.ItemCopperIngot;
 
 public class TileCopperOre extends Tile {
 	public TileCopperOre() {
-		super((char) 177, Color.ORANGE, false);
+		super(TileId.COPPER_ORE, (char) 177, Color.ORANGE, false);
 	}
 
 	@Override

@@ -20,7 +20,7 @@ public class SimpleMapBuilder implements MapBuilder {
 		rand.setSeed(seed);
 	}
 
-	private void randomise() {
+	private void randomize() {
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
 
@@ -31,8 +31,7 @@ public class SimpleMapBuilder implements MapBuilder {
 
 	@Override
 	public Map build() {
-		randomise();
-		// smooth(1);
+		randomize();
 		return new Map(tiles);
 	}
 }

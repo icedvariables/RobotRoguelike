@@ -6,15 +6,18 @@ import robotroguelike.creatures.Creature;
 import robotroguelike.creatures.Directions;
 import robotroguelike.creatures.Player;
 import robotroguelike.game.Game;
-import robotroguelike.game.GraphicsEngine;
 import robotroguelike.game.GlyphColor;
+import robotroguelike.game.GraphicsEngine;
 import robotroguelike.items.ItemCopperIngot;
 import robotroguelike.items.ItemIronIngot;
 import robotroguelike.items.ItemStack;
 import robotroguelike.items.ItemStone;
 import robotroguelike.map.Map;
 import robotroguelike.map.MapManager;
-import robotroguelike.map.SimpleMapBuilder;
+import robotroguelike.map.OreMapBuilder;
+import robotroguelike.tiles.TileCopperOre;
+import robotroguelike.tiles.TileIronOre;
+import robotroguelike.tiles.TileStone;
 
 public class GameScreen implements Screen {
 	public String infoString = "";
@@ -32,7 +35,11 @@ public class GameScreen implements Screen {
 	}
 
 	private void buildNewMap() {
-		map = new SimpleMapBuilder(500, 500).build();
+		map = new OreMapBuilder(300, 300).build();
+		System.out.println("Map is: " + map.width + " x " + map.height);
+		System.out.println("Stone in map: " + map.countAmountOfTile(new TileStone()));
+		System.out.println("Iron ore in map: " + map.countAmountOfTile(new TileIronOre()));
+		System.out.println("Copper ore in map: " + map.countAmountOfTile(new TileCopperOre()));
 
 		player = new Player(map);
 

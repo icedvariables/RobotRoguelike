@@ -7,7 +7,7 @@ import robotroguelike.items.ItemStone;
 
 public class TileStone extends Tile {
 	public TileStone() {
-		super((char) 219, Color.GRAY, false);
+		super(TileId.STONE, (char) 219, Color.GRAY, false);
 	}
 
 	@Override

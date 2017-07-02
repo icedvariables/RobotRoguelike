@@ -57,6 +57,19 @@ public class Map implements Serializable {
 
 		System.out.println(creatures);
 	}
+	
+	public int countAmountOfTile(Tile tile) {
+		int counter = 0;
+
+		for(int x = 0; x < width; x++) {
+			for(int y = 0; y < height; y++) {
+				if(tileAt(x, y).id == tile.id) {
+					counter++;
+				}
+			}
+		}
+		return counter;
+	}
 
 	public Tile[][] getTiles() {
 		return tiles;
