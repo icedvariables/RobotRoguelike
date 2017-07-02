@@ -58,6 +58,7 @@ public class GameScreen implements Screen {
 		displayTiles(terminal);
 		displayCreatures(terminal);
 		terminal.write(infoString, 0, Game.HEIGHT - 1);
+		terminal.write("Version: " + Game.VERSION, 0, 0);
 	}
 
 	public Screen respondToInput(KeyEvent key) {

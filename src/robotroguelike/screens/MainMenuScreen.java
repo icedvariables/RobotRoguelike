@@ -1,15 +1,18 @@
 package robotroguelike.screens;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 
 import asciiPanel.AsciiPanel;
+import robotroguelike.game.Game;
 
 public class MainMenuScreen implements Screen {
 	public void display(AsciiPanel terminal) {
-		terminal.writeCenter("-- Robot Roguelike --", 5);
+		terminal.writeCenter("-- Robot Roguelike --", 5, Color.CYAN);
 		terminal.writeCenter("---", 7);
 		terminal.writeCenter("Press [enter] to build a new map.", 10);
 		terminal.writeCenter("Press [space] to load an existing map.", 11);
+		terminal.write("Version: " + Game.VERSION, 0, 0);
 	}
 
 	public Screen respondToInput(KeyEvent key) {
