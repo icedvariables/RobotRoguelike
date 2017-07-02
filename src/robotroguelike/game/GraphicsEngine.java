@@ -2,12 +2,10 @@ package robotroguelike.game;
 
 import java.awt.Color;
 
-import robotroguelike.tiles.Tile;
-
 public interface GraphicsEngine {
 	public void clear();
 
-	public void drawTile(Tile tile, int x, int y);
+	public void drawTile(GlyphColor tile, int x, int y);
 
 	public void drawChar(char c, int x, int y, Color color);
 

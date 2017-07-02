@@ -29,6 +29,7 @@ public class SimpleMapBuilder implements MapBuilder {
 		}
 	}
 
+	@Override
 	public Map build() {
 		randomise();
 		// smooth(1);

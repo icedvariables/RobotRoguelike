@@ -1,23 +1,20 @@
 package robotroguelike.tiles;
 
 import java.awt.Color;
-import java.io.Serializable;
 
+import robotroguelike.game.GlyphColor;
 import robotroguelike.items.Item;
 import robotroguelike.items.Tier;
 
-public class Tile implements Serializable {
-	private static final long serialVersionUID = -268064312409560406L;
-
-	public char glyph;
-	public Color color;
-	public boolean canWalkOver = true;
-
+public class Tile extends GlyphColor {
+	private static final long serialVersionUID = 3544605713148520921L;
+	
 	private Tier tier = Tier.LOW;
+	private boolean walkOver = false;
 
-	public Tile(char glyph, Color color) {
-		this.glyph = glyph;
-		this.color = color;
+	public Tile(char glyph, Color color, boolean walkOver) {
+		super(glyph, color);
+		this.walkOver = walkOver;
 	}
 
 	public boolean isDiggableWith(Tier itemTier) {
@@ -26,5 +23,9 @@ public class Tile implements Serializable {
 
 	public Item returnOnDig() {
 		return null;
+	}
+	
+	public boolean canCreaturesWalkOver() {
+		return walkOver;
 	}
 }

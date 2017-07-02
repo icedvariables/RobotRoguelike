@@ -3,7 +3,6 @@ package robotroguelike.game;
 import java.awt.Color;
 
 import asciiPanel.AsciiPanel;
-import robotroguelike.tiles.Tile;
 
 public class GraphicsEngineAscii implements GraphicsEngine {
 	private AsciiPanel terminal;
@@ -28,7 +27,7 @@ public class GraphicsEngineAscii implements GraphicsEngine {
 	}
 
 	@Override
-	public void drawTile(Tile tile, int x, int y) {
+	public void drawTile(GlyphColor tile, int x, int y) {
 		terminal.write(tile.glyph, x, y, tile.color);
 	}
 

@@ -7,6 +7,7 @@ import robotroguelike.creatures.Directions;
 import robotroguelike.creatures.Player;
 import robotroguelike.game.Game;
 import robotroguelike.game.GraphicsEngine;
+import robotroguelike.game.GlyphColor;
 import robotroguelike.items.ItemCopperIngot;
 import robotroguelike.items.ItemIronIngot;
 import robotroguelike.items.ItemStack;
@@ -14,7 +15,6 @@ import robotroguelike.items.ItemStone;
 import robotroguelike.map.Map;
 import robotroguelike.map.MapManager;
 import robotroguelike.map.SimpleMapBuilder;
-import robotroguelike.tiles.Tile;
 
 public class GameScreen implements Screen {
 	public String infoString = "";
@@ -109,7 +109,7 @@ public class GameScreen implements Screen {
 				int wx = x + scrollX;
 				int wy = y + scrollY;
 
-				Tile t = map.tileAt(wx, wy);
+				GlyphColor t = map.tileAt(wx, wy);
 				if (t != null)
 					graphics.drawTile(t, x, y);
 			}
