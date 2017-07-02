@@ -56,7 +56,8 @@ public class MapManager {
 
 			version = (String) ois.readObject();
 			if (!version.equals(Game.VERSION)) {
-				throw new MapFileInvalidVersionException("Attempted to load map file with version " + version + " but failed as game is version " + Game.VERSION + ".");
+				throw new MapFileInvalidVersionException("Attempted to load map file with version " + version
+						+ " but failed as game is version " + Game.VERSION + ".");
 			}
 			map = (Map) ois.readObject();
 

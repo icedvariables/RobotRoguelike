@@ -7,21 +7,21 @@ import robotroguelike.tiles.Tile;
 
 public class GraphicsEngineAscii implements GraphicsEngine {
 	private AsciiPanel terminal;
-	
+
 	public GraphicsEngineAscii(AsciiPanel terminal) {
 		this.terminal = terminal;
 	}
-	
+
 	@Override
 	public void clear() {
 		terminal.clear();
 	}
-	
+
 	@Override
 	public void drawChar(char c, int x, int y, Color color) {
 		terminal.write(c, x, y, color);
 	}
-	
+
 	@Override
 	public void drawChar(char c, int x, int y) {
 		terminal.write(c, x, y);
@@ -29,7 +29,7 @@ public class GraphicsEngineAscii implements GraphicsEngine {
 
 	@Override
 	public void drawTile(Tile tile, int x, int y) {
-		terminal.write(tile.glyph,x, y, tile.color);
+		terminal.write(tile.glyph, x, y, tile.color);
 	}
 
 	@Override
