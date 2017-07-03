@@ -34,6 +34,8 @@ public class Creature extends GlyphColor implements Serializable {
 	}
 
 	public boolean moveBy(int mx, int my) {
+		// TODO: Make this method set the creature's direction.
+
 		Tile t = map.tileAt(x + mx, y + my);
 
 		if (t == null || t.canCreaturesWalkOver()) {

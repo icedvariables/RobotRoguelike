@@ -2,7 +2,7 @@ package robotroguelike.items;
 
 public enum ItemId {
 	TEST,
-	STONE, 
+	STONE,
 	IRON_INGOT,
 	COPPER_INGOT,
 	COPPER_CABLE,
@@ -10,5 +10,6 @@ public enum ItemId {
 	IRON_PICKAXE,
 	ELECTRONIC_CIRCUIT,
 	IRON_COG,
-	SIMPLE_ENGINE // 10
+	LOW_TIER_ENGINE, // 10,
+	LOW_TIER_MINING_ROBOT
 }

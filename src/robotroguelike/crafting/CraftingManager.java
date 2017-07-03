@@ -10,7 +10,8 @@ import robotroguelike.items.ItemElectronicCircuit;
 import robotroguelike.items.ItemIronCog;
 import robotroguelike.items.ItemIronIngot;
 import robotroguelike.items.ItemIronPickaxe;
-import robotroguelike.items.ItemSimpleEngine;
+import robotroguelike.items.ItemLowTierEngine;
+import robotroguelike.items.ItemLowTierMiningRobot;
 import robotroguelike.items.ItemStack;
 import robotroguelike.items.ItemStone;
 import robotroguelike.items.ItemStoneHandle;
@@ -33,9 +34,12 @@ public class CraftingManager {
 
 		addCraftingRecipe(new CraftingRecipe(new ItemIronCog(),
 				new ItemStack[] { new ItemStack(new ItemIronIngot(), 2) }));
-		
-		addCraftingRecipe(new CraftingRecipe(new ItemSimpleEngine(),
+
+		addCraftingRecipe(new CraftingRecipe(new ItemLowTierEngine(),
 				new ItemStack[] { new ItemStack(new ItemIronCog(), 2), new ItemStack(new ItemElectronicCircuit(), 1), new ItemStack(new ItemCopperCable(), 2), new ItemStack(new ItemIronIngot(), 4) }));
+
+		addCraftingRecipe(new CraftingRecipe(new ItemLowTierMiningRobot(),
+				new ItemStack[] { new ItemStack(new ItemLowTierEngine(), 1), new ItemStack(new ItemIronPickaxe(), 1), new ItemStack(new ItemElectronicCircuit(), 2), new ItemStack(new ItemIronIngot(), 5)}));
 	}
 
 	public static CraftingRecipe addCraftingRecipe(CraftingRecipe recipe) {
