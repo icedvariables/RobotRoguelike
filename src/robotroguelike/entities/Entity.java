@@ -1,4 +1,4 @@
-package robotroguelike.creatures;
+package robotroguelike.entities;
 
 import java.awt.Color;
 import java.io.Serializable;
@@ -9,7 +9,7 @@ import robotroguelike.items.Item;
 import robotroguelike.map.Map;
 import robotroguelike.tiles.Tile;
 
-public class Creature extends GlyphColor implements Serializable {
+public class Entity extends GlyphColor implements Serializable {
 	private static final long serialVersionUID = 516739414373036469L;
 
 	public Inventory inventory;
@@ -19,7 +19,7 @@ public class Creature extends GlyphColor implements Serializable {
 
 	private Map map;
 
-	public Creature(char glyph, Color color, Map map) {
+	public Entity(char glyph, Color color, Map map) {
 		super(glyph, color);
 		this.map = map;
 		this.inventory = new Inventory();

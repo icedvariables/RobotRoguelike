@@ -1,4 +1,4 @@
-package robotroguelike.creatures;
+package robotroguelike.entities;
 
 public class Directions {
 	public static final int[] UP = { 0, -1 };

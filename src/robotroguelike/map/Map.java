@@ -3,7 +3,7 @@ package robotroguelike.map;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import robotroguelike.creatures.Creature;
+import robotroguelike.entities.Entity;
 import robotroguelike.items.Item;
 import robotroguelike.tiles.Tile;
 
@@ -13,7 +13,7 @@ public class Map implements Serializable {
 	public final String name = "map";
 
 	private Tile[][] tiles;
-	public ArrayList<Creature> creatures = new ArrayList<Creature>();
+	public ArrayList<Entity> creatures = new ArrayList<Entity>();
 
 	public final int width;
 	public final int height;
@@ -24,7 +24,7 @@ public class Map implements Serializable {
 		this.height = tiles[0].length;
 	}
 
-	public Map(Tile[][] tiles, ArrayList<Creature> creatures) {
+	public Map(Tile[][] tiles, ArrayList<Entity> creatures) {
 		this.tiles = tiles;
 		this.width = tiles.length;
 		this.height = tiles[0].length;
@@ -52,7 +52,7 @@ public class Map implements Serializable {
 		return returnItem;
 	}
 
-	public void addCreature(Creature c) {
+	public void addCreature(Entity c) {
 		creatures.add(c);
 
 		System.out.println(creatures);

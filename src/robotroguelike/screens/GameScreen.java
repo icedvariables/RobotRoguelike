@@ -2,9 +2,9 @@ package robotroguelike.screens;
 
 import java.awt.event.KeyEvent;
 
-import robotroguelike.creatures.Creature;
-import robotroguelike.creatures.Directions;
-import robotroguelike.creatures.Player;
+import robotroguelike.entities.Entity;
+import robotroguelike.entities.Directions;
+import robotroguelike.entities.Player;
 import robotroguelike.game.Game;
 import robotroguelike.game.GlyphColor;
 import robotroguelike.game.GraphicsEngine;
@@ -35,7 +35,7 @@ public class GameScreen implements Screen {
 	}
 
 	private void buildNewMap() {
-		map = new OreMapBuilder(300, 300).build();
+		map = new OreMapBuilder(500, 300).build();
 		System.out.println("Map is: " + map.width + " x " + map.height);
 		System.out.println("Stone in map: " + map.countAmountOfTile(new TileStone()));
 		System.out.println("Iron ore in map: " + map.countAmountOfTile(new TileIronOre()));
@@ -125,7 +125,7 @@ public class GameScreen implements Screen {
 
 	private void displayCreatures(GraphicsEngine graphics) {
 		for (int i = 0; i < map.creatures.size(); i++) {
-			Creature c = map.creatures.get(i);
+			Entity c = map.creatures.get(i);
 
 			int drawX = c.getX() - scrollX;
 			int drawY = c.getY() - scrollY;
