@@ -8,10 +8,10 @@ public class GlyphColor implements Serializable {
 
 	public char glyph;
 	public Color color;
-	
+
 	public GlyphColor(char glyph, Color color) {
 		// TODO: Make selectors on menus use this class instead.
-		
+
 		this.glyph = glyph;
 		this.color = color;
 	}
