@@ -2,6 +2,10 @@ package robotroguelike.items;
 
 import java.io.Serializable;
 
+import robotroguelike.entities.Entity;
+import robotroguelike.map.Map;
+import robotroguelike.tiles.Tile;
+
 public class Item implements Serializable {
 	private static final long serialVersionUID = -5818639862963916760L;
 
@@ -20,6 +24,14 @@ public class Item implements Serializable {
 		this.description = description;
 		this.tier = tier;
 		this.equippable = equippable;
+	}
+
+	public Tile getTileToPlace() {
+		return null;
+	}
+
+	public Entity getEntityToPlace(Map map) {
+		return null;
 	}
 
 	public String getName() {

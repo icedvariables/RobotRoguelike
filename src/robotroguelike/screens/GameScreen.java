@@ -3,7 +3,6 @@ package robotroguelike.screens;
 import java.awt.event.KeyEvent;
 
 import robotroguelike.entities.Entity;
-import robotroguelike.entities.Directions;
 import robotroguelike.entities.Player;
 import robotroguelike.game.Game;
 import robotroguelike.game.GlyphColor;
@@ -47,7 +46,8 @@ public class GameScreen implements Screen {
 		player.inventory.giveItemStack(new ItemStack(new ItemIronIngot(), 25));
 		player.inventory.giveItemStack(new ItemStack(new ItemCopperIngot(), 25));
 
-		movePlayerAndScroll(map.width / 2, map.height / 2);
+		player.setPosition(map.width / 2, map.height / 2);
+		scroll(player.getX(), player.getY());
 		map.addCreature(player);
 	}
 
@@ -71,23 +71,13 @@ public class GameScreen implements Screen {
 
 	@Override
 	public Screen respondToInput(KeyEvent key) {
+		for (int i = 0; i < map.creatures.size(); i++) {
+			map.creatures.get(i).update(key);
+		}
+
+		scroll(player.getX(), player.getY());
+
 		switch (key.getKeyCode()) {
-		case KeyEvent.VK_UP:
-			player.direction = Directions.UP;
-			movePlayerAndScroll(0, -1);
-			break;
-		case KeyEvent.VK_DOWN:
-			player.direction = Directions.DOWN;
-			movePlayerAndScroll(0, 1);
-			break;
-		case KeyEvent.VK_LEFT:
-			player.direction = Directions.LEFT;
-			movePlayerAndScroll(-1, 0);
-			break;
-		case KeyEvent.VK_RIGHT:
-			player.direction = Directions.RIGHT;
-			movePlayerAndScroll(1, 0);
-			break;
 		case KeyEvent.VK_I:
 			return new InventoryScreen(this, player.inventory);
 		case KeyEvent.VK_C:
@@ -99,15 +89,16 @@ public class GameScreen implements Screen {
 			MapManager.saveMap(map);
 			infoString = "Saved map to save file '" + map.name + MapManager.FILE_EXTENSION + "'.";
 			break;
+		case KeyEvent.VK_P:
+			player.placeEquippedItem();
 		}
 
 		return this;
 	}
 
-	private void movePlayerAndScroll(int moveX, int moveY) {
-		player.moveBy(moveX, moveY);
-		scrollX = player.getX() - (Game.WIDTH / 2);
-		scrollY = player.getY() - (Game.HEIGHT / 2);
+	private void scroll(int x, int y) {
+		scrollX = x - (Game.WIDTH / 2);
+		scrollY = y - (Game.HEIGHT / 2);
 	}
 
 	private void displayTiles(GraphicsEngine graphics) {

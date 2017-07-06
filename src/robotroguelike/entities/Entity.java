@@ -1,11 +1,13 @@
 package robotroguelike.entities;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.io.Serializable;
 
 import robotroguelike.game.GlyphColor;
 import robotroguelike.game.Inventory;
 import robotroguelike.items.Item;
+import robotroguelike.items.ItemStack;
 import robotroguelike.map.Map;
 import robotroguelike.tiles.Tile;
 
@@ -25,12 +27,34 @@ public class Entity extends GlyphColor implements Serializable {
 		this.inventory = new Inventory();
 	}
 
+	public void update(KeyEvent key) {}
+
 	public void dig(int wx, int wy) {
 		Item returnItem = null;
 		if (inventory.getEquippedItemStack() != null)
 			returnItem = map.dig(wx, wy, inventory.getEquippedItemStack().getItem());
 		if (returnItem != null)
 			inventory.giveItem(returnItem);
+	}
+
+	public boolean placeEquippedItem() {
+		boolean success = false;
+
+		int placeX = getX() + direction[0];
+		int placeY = getY() + direction[1];
+
+		ItemStack equippedStack = inventory.getEquippedItemStack();
+		Entity entityToPlace = equippedStack.getItem().getEntityToPlace(map);
+		Tile tileToPlace = equippedStack.getItem().getTileToPlace();
+
+		if(equippedStack.getQuantity() > 0) {
+			equippedStack.decreaseQuantityBy(1);
+			success = map.placeEntity(placeX, placeY, entityToPlace); // First, attempt to place the relevant entity.
+			if(!success)
+				success = map.placeTile(placeX, placeY, tileToPlace); // If that fails, place the item's equivalent tile.
+		}
+
+		return success;
 	}
 
 	public boolean moveBy(int mx, int my) {
@@ -47,9 +71,10 @@ public class Entity extends GlyphColor implements Serializable {
 		return false;
 	}
 
-	/*
-	 * public void setPosition(int x, int y){ this.x = x; this.y = y; }
-	 */
+	public void setPosition(int x, int y){
+		this.x = x;
+		this.y = y;
+	}
 
 	public int getX() {
 		return x;

@@ -38,6 +38,17 @@ public class Map implements Serializable {
 		return null;
 	}
 
+	public Entity entityAt(int x, int y) {
+		for(int i = 0; i < creatures.size(); i++) {
+			Entity e = creatures.get(i);
+
+			if(e.getX() == x && e.getY() == y)
+				return e;
+		}
+
+		return null;
+	}
+
 	public Item dig(int x, int y, Item item) {
 		Item returnItem = null;
 
@@ -50,6 +61,26 @@ public class Map implements Serializable {
 		}
 
 		return returnItem;
+	}
+
+	public boolean placeTile(int x, int y, Tile tile) {
+		if(tile != null && tileAt(x, y) == null) {
+			tiles[x][y] = tile;
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean placeEntity(int x, int y, Entity entity) {
+		if(entity != null && entityAt(x, y) == null) {
+			entity.setPosition(x, y);
+			creatures.add(entity);
+
+			return true;
+		}
+
+		return false;
 	}
 
 	public void addCreature(Entity c) {
