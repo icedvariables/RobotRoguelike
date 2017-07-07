@@ -2,7 +2,6 @@ package robotroguelike.game;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import robotroguelike.crafting.CraftingRecipe;
@@ -17,6 +16,7 @@ public class Inventory implements Serializable {
 
 	public Inventory() {
 		// TODO: Make inventory have a maximum size/weight restriction.
+		// TODO: Add better handling of item stack quantities and what happens when they reach 0.
 		items = new ArrayList<ItemStack>();
 	}
 
@@ -89,27 +89,23 @@ public class Inventory implements Serializable {
 		if (!hasItems(stacks))
 			return false;
 
-		List<Integer> stacksToBeRemovedIndexes = new ArrayList<Integer>();
+		List<ItemStack> stacksToBeRemovedIndexes = new ArrayList<ItemStack>();
 
-		for (int i = 0; i < stacks.length; i++) {
-			for (int j = 0; j < items.size(); j++) {
-				if (items.get(j).getItem().id == stacks[i].getItem().id) {
-					boolean success = items.get(j).decreaseQuantityBy(stacks[i].getQuantity());
+		for (int ingredientsIndex = 0; ingredientsIndex < stacks.length; ingredientsIndex++) {
+			for (int itemsIndex = 0; itemsIndex < items.size(); itemsIndex++) {
+				if (items.get(itemsIndex).getItem().id == stacks[ingredientsIndex].getItem().id) {
+					boolean success = items.get(itemsIndex).decreaseQuantityBy(stacks[ingredientsIndex].getQuantity());
 
+					// decreaseQuantityBy only fails if the quantity reaches 0.
+					// If thats then case then add the stack to stacksToBeRemoved so that it can be removed from the inventory.
 					if (!success)
-						stacksToBeRemovedIndexes.add(j);
+						stacksToBeRemovedIndexes.add(items.get(itemsIndex));
 				}
 			}
 		}
 
-		// Remove any stacks that now have a quantity of 0.
-		// Put the indexes of these stacks in reverse order so that by removing them,
-		// the position of the next stack to be removed is not shifted.
-		Collections.sort(stacksToBeRemovedIndexes);
-		Collections.reverse(stacksToBeRemovedIndexes);
-
 		for (int i = 0; i < stacksToBeRemovedIndexes.size(); i++) {
-			items.remove(stacksToBeRemovedIndexes.get(i).intValue()); // .intValue() is needed to convert from Integer to int.
+			items.remove(stacksToBeRemovedIndexes.get(i));
 		}
 
 		return true;
@@ -139,6 +135,10 @@ public class Inventory implements Serializable {
 			str += (i + 1) == items.size() ? "." : ", "; // Add commas to separate items in the list.
 		}
 		return str;
+	}
+
+	public void removeItemStack(ItemStack stack) {
+		items.remove(stack);
 	}
 
 	public void toggleItemSelection(int i) {

@@ -49,7 +49,10 @@ public class Entity extends GlyphColor implements Serializable {
 		Tile tileToPlace = equippedStack.getItem().getTileToPlace();
 
 		if(equippedStack.getQuantity() > 0) {
-			equippedStack.decreaseQuantityBy(1);
+			boolean quantitySuccess = equippedStack.decreaseQuantityBy(1);
+			if(!quantitySuccess) // This only fails if the quantity reaches 0.
+				inventory.removeItemStack(equippedStack); // If it does fail, remove the item stack from the inventory.
+
 			success = map.placeEntity(placeX, placeY, entityToPlace); // First, attempt to place the relevant entity.
 			if(!success)
 				success = map.placeTile(placeX, placeY, tileToPlace); // If that fails, place the item's equivalent tile.
