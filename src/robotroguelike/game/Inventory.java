@@ -72,7 +72,7 @@ public class Inventory implements Serializable {
 	}
 
 	public boolean equipItem(int i) {
-		if (i < items.size() && i > 0 && items.get(i).getItem().isEquippable()) {
+		if (i < items.size() && items.get(i).getItem().isEquippable()) {
 			equippedItemStack = items.get(i);
 			return true;
 		}
@@ -109,8 +109,7 @@ public class Inventory implements Serializable {
 		Collections.reverse(stacksToBeRemovedIndexes);
 
 		for (int i = 0; i < stacksToBeRemovedIndexes.size(); i++) {
-			items.remove(stacksToBeRemovedIndexes.get(i).intValue()); // .intValue() is needed to convert from Integer
-																		// to int.
+			items.remove(stacksToBeRemovedIndexes.get(i).intValue()); // .intValue() is needed to convert from Integer to int.
 		}
 
 		return true;
