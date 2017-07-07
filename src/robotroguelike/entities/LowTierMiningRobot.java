@@ -2,6 +2,8 @@ package robotroguelike.entities;
 
 import java.awt.event.KeyEvent;
 
+import javax.script.ScriptException;
+
 import robotroguelike.items.ItemIronPickaxe;
 import robotroguelike.items.Tier;
 import robotroguelike.map.Map;
@@ -15,8 +17,11 @@ public class LowTierMiningRobot extends Robot {
 
 	@Override
 	public void update(KeyEvent key) {
-		boolean success = moveBy(0, 1);
-		if(!success)
-			dig(x, y + 1);
+		try {
+			engine.eval("update()");
+		} catch (ScriptException e) {
+			System.err.println("Robot script threw an error!");
+			e.printStackTrace();
+		}
 	}
 }

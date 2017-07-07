@@ -29,12 +29,13 @@ public class Entity extends GlyphColor implements Serializable {
 
 	public void update(KeyEvent key) {}
 
-	public void dig(int wx, int wy) {
+	public Item dig(int wx, int wy) {
 		Item returnItem = null;
 		if (inventory.getEquippedItemStack() != null)
 			returnItem = map.dig(wx, wy, inventory.getEquippedItemStack().getItem());
 		if (returnItem != null)
 			inventory.giveItem(returnItem);
+		return returnItem;
 	}
 
 	public boolean placeEquippedItem() {

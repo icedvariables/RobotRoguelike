@@ -31,4 +31,4 @@ A roguelike set deep underground where you can create autonomous robots to harve
 * ~~Add version and prevent loading maps of a different version.~~
 * Make maps only save the id of each tile rather than individual different tile objects (this would mean that hopefully the game will support much larger maps).
 * When crafting, show in the ingredients list of each recipe what items the player does and doesn't have.
-* Allow the writing of robot programs in javascript.
+* ~~Allow the writing of robot programs in javascript.~~
