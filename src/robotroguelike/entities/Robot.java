@@ -10,6 +10,8 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
+import robotroguelike.logging.Log;
+import robotroguelike.logging.Logger;
 import robotroguelike.map.Map;
 import robotroguelike.robotscripting.RobotControl;
 
@@ -36,7 +38,7 @@ public class Robot extends Entity {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (ScriptException e) {
-			System.err.println("Robot script threw an error!");
+			Logger.addLog("Robot '" + getName() + "' script threw an error: " + e.getMessage(), Log.ERROR);
 
 			e.printStackTrace();
 		}
@@ -49,11 +51,11 @@ public class Robot extends Entity {
 
 			inv.invokeFunction("update");
 		} catch (ScriptException e) {
-			System.err.println("Robot script threw an error!");
+			Logger.addLog("Robot '" + getName() + "' script threw an error: " + e.getMessage(), Log.ERROR);
 
 			e.printStackTrace();
 		} catch(NoSuchMethodException e) {
-			System.err.println("Robot script does noot have an update() function!");
+			Logger.addLog("Robot '" + getName() + "' script does not have an update() function to call!", Log.ERROR);
 
 			e.printStackTrace();
 		}
