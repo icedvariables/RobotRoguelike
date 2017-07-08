@@ -9,6 +9,7 @@ import robotroguelike.game.GlyphColor;
 import robotroguelike.game.GraphicsEngine;
 import robotroguelike.items.ItemCopperIngot;
 import robotroguelike.items.ItemIronIngot;
+import robotroguelike.items.ItemLowTierMiningRobot;
 import robotroguelike.items.ItemStack;
 import robotroguelike.items.ItemStone;
 import robotroguelike.map.Map;
@@ -45,6 +46,7 @@ public class GameScreen implements Screen {
 		player.inventory.giveItemStack(new ItemStack(new ItemStone(), 25));
 		player.inventory.giveItemStack(new ItemStack(new ItemIronIngot(), 25));
 		player.inventory.giveItemStack(new ItemStack(new ItemCopperIngot(), 25));
+		player.inventory.giveItemStack(new ItemStack(new ItemLowTierMiningRobot(), 5));
 
 		player.setPosition(map.width / 2, map.height / 2);
 		scroll(player.getX(), player.getY());

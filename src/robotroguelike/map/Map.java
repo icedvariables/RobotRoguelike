@@ -64,7 +64,7 @@ public class Map implements Serializable {
 	}
 
 	public boolean placeTile(int x, int y, Tile tile) {
-		if(tile != null && tileAt(x, y) == null) {
+		if(tile != null && tileAt(x, y) == null && entityAt(x, y) == null) {
 			tiles[x][y] = tile;
 			return true;
 		}
@@ -73,7 +73,7 @@ public class Map implements Serializable {
 	}
 
 	public boolean placeEntity(int x, int y, Entity entity) {
-		if(entity != null && entityAt(x, y) == null) {
+		if(entity != null && entityAt(x, y) == null && tileAt(x, y) == null) {
 			entity.setPosition(x, y);
 			creatures.add(entity);
 

@@ -34,10 +34,13 @@ public class Entity extends GlyphColor implements Serializable {
 
 	public Item dig(int wx, int wy) {
 		Item returnItem = null;
+
 		if (inventory.getEquippedItemStack() != null)
 			returnItem = map.dig(wx, wy, inventory.getEquippedItemStack().getItem());
+
 		if (returnItem != null)
 			inventory.giveItem(returnItem);
+
 		return returnItem;
 	}
 
@@ -48,17 +51,24 @@ public class Entity extends GlyphColor implements Serializable {
 		int placeY = getY() + direction[1];
 
 		ItemStack equippedStack = inventory.getEquippedItemStack();
+
+		if(equippedStack == null) // Return if nothing is equipped.
+			return false;
+
 		Entity entityToPlace = equippedStack.getItem().getEntityToPlace(map);
 		Tile tileToPlace = equippedStack.getItem().getTileToPlace();
 
 		if(equippedStack.getQuantity() > 0) {
-			boolean quantitySuccess = equippedStack.decreaseQuantityBy(1);
-			if(!quantitySuccess) // This only fails if the quantity reaches 0.
-				inventory.removeItemStack(equippedStack); // If it does fail, remove the item stack from the inventory.
-
 			success = map.placeEntity(placeX, placeY, entityToPlace); // First, attempt to place the relevant entity.
 			if(!success)
 				success = map.placeTile(placeX, placeY, tileToPlace); // If that fails, place the item's equivalent tile.
+
+			// If an entity or tile is successfully placed then decrease the item quantity.
+			if(success) {
+				boolean quantitySuccess = equippedStack.decreaseQuantityBy(1);
+				if(!quantitySuccess) // This only fails if the quantity reaches 0.
+					inventory.removeItemStack(equippedStack); // If it does fail, remove the item stack from the inventory.
+			}
 		}
 
 		return success;
