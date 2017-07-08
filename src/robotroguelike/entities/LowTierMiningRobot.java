@@ -10,7 +10,7 @@ import robotroguelike.map.Map;
 
 public class LowTierMiningRobot extends Robot {
 	public LowTierMiningRobot(Map map) {
-		super('R', Tier.LOW.color, map);
+		super("Low Tier Mining Robot", 'R', Tier.LOW.color, map);
 		inventory.giveItem(new ItemIronPickaxe());
 		inventory.equipItem(0);
 	}

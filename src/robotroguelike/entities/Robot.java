@@ -15,8 +15,8 @@ public class Robot extends Entity {
 	private ScriptEngineManager engineManager;
 	protected ScriptEngine engine;
 
-	public Robot(char glyph, Color color, Map map) {
-		super(glyph, color, map);
+	public Robot(String name, char glyph, Color color, Map map) {
+		super(name, glyph, color, map);
 		engineManager = new ScriptEngineManager();
 		engine = engineManager.getEngineByName("JavaScript");
 

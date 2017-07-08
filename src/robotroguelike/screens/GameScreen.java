@@ -95,7 +95,7 @@ public class GameScreen implements Screen {
 		case KeyEvent.VK_E:
 			Entity e = map.entityAt(player.getX() + player.direction[0], player.getY() + player.direction[1]);
 			if(e != null)
-				return new InventoryScreen(this, e.inventory, "Robot");
+				return new InventoryScreen(this, e.inventory, e.getName());
 			break;
 		}
 

@@ -14,6 +14,8 @@ import robotroguelike.tiles.Tile;
 public class Entity extends GlyphColor implements Serializable {
 	private static final long serialVersionUID = 516739414373036469L;
 
+	private String name;
+
 	public Inventory inventory;
 	public int[] direction = { 0, 0 };
 
@@ -21,8 +23,9 @@ public class Entity extends GlyphColor implements Serializable {
 
 	private Map map;
 
-	public Entity(char glyph, Color color, Map map) {
+	public Entity(String name, char glyph, Color color, Map map) {
 		super(glyph, color);
+		this.name = name;
 		this.map = map;
 		this.inventory = new Inventory();
 	}
@@ -79,6 +82,10 @@ public class Entity extends GlyphColor implements Serializable {
 	public void setPosition(int x, int y){
 		this.x = x;
 		this.y = y;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public int getX() {

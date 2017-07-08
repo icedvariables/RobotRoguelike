@@ -7,7 +7,7 @@ import robotroguelike.map.Map;
 
 public class Player extends Entity {
 	public Player(Map map) {
-		super('@', Color.YELLOW, map);
+		super("Player", '@', Color.YELLOW, map);
 	}
 
 	@Override
