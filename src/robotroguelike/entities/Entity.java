@@ -65,8 +65,9 @@ public class Entity extends GlyphColor implements Serializable {
 		// TODO: Make this method set the creature's direction.
 
 		Tile t = map.tileAt(x + mx, y + my);
+		Entity e = map.entityAt(x + mx, y + my);
 
-		if (t == null || t.canCreaturesWalkOver()) {
+		if ((t == null || t.canCreaturesWalkOver()) && e == null) {
 			x += mx;
 			y += my;
 			return true;
