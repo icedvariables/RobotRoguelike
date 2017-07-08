@@ -37,6 +37,7 @@ public class Inventory implements Serializable {
 			ItemStack itm = items.get(i);
 
 			if(itm.selectedInInventory) {
+				itm.selectedInInventory = false;
 				intoInventory.giveItemStack(itm);
 				items.remove(itm);
 			}
@@ -77,7 +78,7 @@ public class Inventory implements Serializable {
 	public ItemStack getEquippedItemStack() {
 		return equippedItemStack;
 	}
-	
+
 	public int getEquippedItemIndex() {
 		if(equippedItemStack != null)
 			return items.indexOf(equippedItemStack);
