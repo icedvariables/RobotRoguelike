@@ -18,7 +18,9 @@ A roguelike set deep underground where you can create autonomous robots to harve
 * Use a proper noise generating library for map generation.
 * Generate caves in maps.
 * ~~Add simple mining robot.~~
-* Add chests.
+* ~~Add chests.~~
+* ~~Allow the depositing of items in inventories.~~
+* Allow the withdrawal of items from inventories.
 * Add furnaces and ore smelting.
 * ~~Save maps.~~
 * ~~Load maps.~~

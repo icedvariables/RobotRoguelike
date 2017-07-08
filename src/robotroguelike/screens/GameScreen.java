@@ -79,23 +79,29 @@ public class GameScreen implements Screen {
 
 		scroll(player.getX(), player.getY());
 
+		Entity e;
+
 		switch (key.getKeyCode()) {
-		case KeyEvent.VK_I:
+		case KeyEvent.VK_I: // INVENTORY
 			return new InventoryScreen(this, player.inventory, "Player");
-		case KeyEvent.VK_C:
+		case KeyEvent.VK_C: // CRAFTING
 			return new CraftingScreen(this, player.inventory);
-		case KeyEvent.VK_SPACE:
+		case KeyEvent.VK_D: // DEPOSIT SELECTED ITEMS
+			e = map.entityAt(player.getX() + player.direction[0], player.getY() + player.direction[1]);
+			if(e != null)
+				player.inventory.moveSelectedItemsInto(e.inventory);
+		case KeyEvent.VK_SPACE: // DIG
 			player.dig();
 			break;
-		case KeyEvent.VK_S:
+		case KeyEvent.VK_S: // SAVE MAP
 			MapManager.saveMap(map);
 			infoString = "Saved map to save file '" + map.name + MapManager.FILE_EXTENSION + "'.";
 			break;
-		case KeyEvent.VK_P:
+		case KeyEvent.VK_P: // PLACE EQUIPPED ITEM
 			player.placeEquippedItem();
 			break;
-		case KeyEvent.VK_E:
-			Entity e = map.entityAt(player.getX() + player.direction[0], player.getY() + player.direction[1]);
+		case KeyEvent.VK_E: // OPEN ENTITY'S INVENTORY
+			e = map.entityAt(player.getX() + player.direction[0], player.getY() + player.direction[1]);
 			if(e != null)
 				return new InventoryScreen(this, e.inventory, e.getName());
 			break;

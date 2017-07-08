@@ -32,6 +32,17 @@ public class Inventory implements Serializable {
 		return success;
 	}
 
+	public void moveSelectedItemsInto(Inventory intoInventory) {
+		for(int i = 0; i < size(); i++) {
+			ItemStack itm = items.get(i);
+
+			if(itm.selectedInInventory) {
+				intoInventory.giveItemStack(itm);
+				items.remove(itm);
+			}
+		}
+	}
+
 	public ItemStack getItemStackAt(int index) {
 		return items.get(index);
 	}
@@ -43,7 +54,7 @@ public class Inventory implements Serializable {
 	public void giveItem(Item itm) {
 		for (int i = 0; i < size(); i++) {
 			if (items.get(i).getItem().id == itm.id) {
-				items.get(i).increaseQuantityByOne();
+				items.get(i).increaseQuantityBy(1);
 				return;
 			}
 		}
@@ -51,9 +62,16 @@ public class Inventory implements Serializable {
 		items.add(new ItemStack(itm, 1));
 	}
 
-	public void giveItemStack(ItemStack stack) {
-		// TODO: Add new stacks to existing stacks rather than having them separate.
-		items.add(stack);
+	public boolean giveItemStack(ItemStack stack) {
+		// Check if the stack is already in the inventory. If it is then increase its quantity.
+		for(int i = 0; i < size(); i++) {
+			if(items.get(i).getItem().id == stack.getItem().id) {
+				return items.get(i).increaseQuantityBy(stack.getQuantity());
+			}
+		}
+
+		// If there is no existing stack then add a new one.
+		return items.add(stack);
 	}
 
 	public ItemStack getEquippedItemStack() {

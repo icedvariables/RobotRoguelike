@@ -35,8 +35,8 @@ public class ItemStack implements Serializable {
 		return setQuantity(quantity - x);
 	}
 
-	public boolean increaseQuantityByOne() {
-		return setQuantity(quantity + 1);
+	public boolean increaseQuantityBy(int x) {
+		return setQuantity(quantity + x);
 	}
 
 	@Override
