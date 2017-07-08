@@ -87,24 +87,39 @@ public class GameScreen implements Screen {
 		switch (key.getKeyCode()) {
 		case KeyEvent.VK_I: // INVENTORY
 			return new InventoryScreen(this, player.inventory, "Player");
+
 		case KeyEvent.VK_C: // CRAFTING
 			return new CraftingScreen(this, player.inventory);
+
 		case KeyEvent.VK_D: // DEPOSIT SELECTED ITEMS
 			e = map.entityAt(player.getX() + player.direction[0], player.getY() + player.direction[1]);
 			if(e != null) {
 				Logger.addLog("Depositing selected items into " + e.getName() + "'s inventory.", Log.NORMAL);
 				player.inventory.moveSelectedItemsInto(e.inventory);
 			}
+			break;
+
+		case KeyEvent.VK_W: // WITHDRAW SELECTED ITEMS
+			e = map.entityAt(player.getX() + player.direction[0], player.getY() + player.direction[1]);
+			if(e != null) {
+				Logger.addLog("Withdrawing selected items from " + e.getName() + "'s inventory.", Log.NORMAL);
+				e.inventory.moveSelectedItemsInto(player.inventory);
+			}
+			break;
+
 		case KeyEvent.VK_SPACE: // DIG
 			player.dig();
 			break;
+
 		case KeyEvent.VK_S: // SAVE MAP
 			MapManager.saveMap(map);
 			Logger.addLog("Saved map to save file '" + map.name + MapManager.FILE_EXTENSION + "'.", Log.NORMAL);
 			break;
+
 		case KeyEvent.VK_P: // PLACE EQUIPPED ITEM
 			player.placeEquippedItem();
 			break;
+
 		case KeyEvent.VK_E: // OPEN ENTITY'S INVENTORY
 			e = map.entityAt(player.getX() + player.direction[0], player.getY() + player.direction[1]);
 			if(e != null)
