@@ -54,7 +54,7 @@ public class Map implements Serializable {
 
 		Tile tile = tileAt(x, y);
 
-		if (item != null && tile != null && tile.isDiggableWith(item.getTier())) {
+		if (item != null && tile != null && item.isDiggingTool() && tile.isDiggableWith(item.getTier())) {
 			returnItem = tile.returnOnDig();
 
 			tiles[x][y] = null;

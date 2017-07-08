@@ -5,7 +5,7 @@ import robotroguelike.tiles.TileStone;
 
 public class ItemStone extends Item {
 	public ItemStone() {
-		super(ItemId.STONE, "Stone", "A piece of rock.", Tier.LOW, true);
+		super(ItemId.STONE, "Stone", "A piece of rock.", Tier.LOW, true, false);
 	}
 
 	@Override

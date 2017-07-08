@@ -17,7 +17,7 @@ public class Entity extends GlyphColor implements Serializable {
 	private String name;
 
 	public Inventory inventory;
-	public int[] direction = { 0, 0 };
+	public int[] direction = Directions.UP;
 
 	protected int x, y;
 
@@ -31,6 +31,10 @@ public class Entity extends GlyphColor implements Serializable {
 	}
 
 	public void update(KeyEvent key) {}
+
+	public Item dig() {
+		return dig(x + direction[0], y + direction[1]);
+	}
 
 	public Item dig(int wx, int wy) {
 		Item returnItem = null;

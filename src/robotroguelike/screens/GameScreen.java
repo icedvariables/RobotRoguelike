@@ -85,7 +85,7 @@ public class GameScreen implements Screen {
 		case KeyEvent.VK_C:
 			return new CraftingScreen(this, player.inventory);
 		case KeyEvent.VK_SPACE:
-			player.dig(player.getX() + player.direction[0], player.getY() + player.direction[1]);
+			player.dig();
 			break;
 		case KeyEvent.VK_S:
 			MapManager.saveMap(map);

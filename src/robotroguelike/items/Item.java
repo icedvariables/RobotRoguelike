@@ -15,15 +15,17 @@ public class Item implements Serializable {
 	private String description = "An item.";
 	private Tier tier = Tier.LOW;
 	private boolean equippable;
+	private boolean diggingTool = false;
 
 	// TODO: Implement durability for items.
 
-	public Item(ItemId id, String name, String description, Tier tier, boolean equippable) {
+	public Item(ItemId id, String name, String description, Tier tier, boolean equippable, boolean diggingTool) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.tier = tier;
 		this.equippable = equippable;
+		this.diggingTool = diggingTool;
 	}
 
 	public Tile getTileToPlace() {
@@ -48,5 +50,9 @@ public class Item implements Serializable {
 
 	public boolean isEquippable() {
 		return equippable;
+	}
+
+	public boolean isDiggingTool() {
+		return diggingTool;
 	}
 }
