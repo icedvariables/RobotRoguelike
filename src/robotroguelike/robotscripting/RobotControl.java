@@ -11,26 +11,26 @@ public class RobotControl {
 	}
 
 	public Item dig(int[] direction) {
-		return robot.dig(direction[0], direction[1]);
+		return robot.dig(robot.getX() + direction[0], robot.getY() + direction[1]);
+	}
+
+	public boolean move(int[] direction) {
+		return robot.moveBy(direction[0], direction[1]);
 	}
 
 	public void display(String text) {
-		System.out.println("Robot: " + text);
+		System.out.println(robot.getName() + ": " + text);
 	}
 
-	public boolean moveUp() {
-		return robot.moveBy(0, -1);
+	public String getName() {
+		return robot.getName();
 	}
 
-	public boolean moveDown() {
-		return robot.moveBy(0, 1);
+	public int getX() {
+		return robot.getX();
 	}
 
-	public boolean moveLeft() {
-		return robot.moveBy(-1, 0);
-	}
-
-	public boolean moveRight() {
-		return robot.moveBy(1, 0);
+	public int getY() {
+		return robot.getY();
 	}
 }
