@@ -76,7 +76,7 @@ public class InventoryScreen implements Screen {
 				selectorIndex--;
 			break;
 		case KeyEvent.VK_E:
-			inventory.equipItem(selectorIndex);
+			inventory.toggleItemEquip(selectorIndex);
 			break;
 		case KeyEvent.VK_ENTER:
 			inventory.toggleItemSelection(selectorIndex);

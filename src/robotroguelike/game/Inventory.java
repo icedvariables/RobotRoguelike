@@ -49,7 +49,7 @@ public class Inventory implements Serializable {
 	}
 
 	public ItemStack[] getItems() {
-		return items.toArray(new ItemStack[items.size()]);
+		return items.toArray(new ItemStack[size()]);
 	}
 
 	public void giveItem(Item itm) {
@@ -97,11 +97,15 @@ public class Inventory implements Serializable {
 	}
 
 	public boolean equipItem(int i) {
-		if (i < items.size() && items.get(i).getItem().isEquippable()) {
+		if (i < size() && items.get(i).getItem().isEquippable()) {
 			equippedItemStack = items.get(i);
 			return true;
 		}
 		return false;
+	}
+
+	public void unequipItem() {
+		equippedItemStack = null;
 	}
 
 	public void equipItem(ItemStack i) {
@@ -117,7 +121,7 @@ public class Inventory implements Serializable {
 		List<ItemStack> stacksToBeRemovedIndexes = new ArrayList<ItemStack>();
 
 		for (int ingredientsIndex = 0; ingredientsIndex < stacks.length; ingredientsIndex++) {
-			for (int itemsIndex = 0; itemsIndex < items.size(); itemsIndex++) {
+			for (int itemsIndex = 0; itemsIndex < size(); itemsIndex++) {
 				if (items.get(itemsIndex).getItem().id == stacks[ingredientsIndex].getItem().id) {
 					boolean success = items.get(itemsIndex).decreaseQuantityBy(stacks[ingredientsIndex].getQuantity());
 
@@ -145,7 +149,7 @@ public class Inventory implements Serializable {
 	}
 
 	public boolean hasItemStack(ItemStack stack) {
-		for (int i = 0; i < items.size(); i++) {
+		for (int i = 0; i < size(); i++) {
 			if (items.get(i).getItem().id == stack.getItem().id && items.get(i).getQuantity() >= stack.getQuantity())
 				return true;
 		}
@@ -155,9 +159,9 @@ public class Inventory implements Serializable {
 	@Override
 	public String toString() {
 		String str = "";
-		for (int i = 0; i < items.size(); i++) {
+		for (int i = 0; i < size(); i++) {
 			str += items.get(i).toString();
-			str += (i + 1) == items.size() ? "." : ", "; // Add commas to separate items in the list.
+			str += (i + 1) == size() ? "." : ", "; // Add commas to separate items in the list.
 		}
 		return str;
 	}
@@ -168,6 +172,14 @@ public class Inventory implements Serializable {
 
 	public void toggleItemSelection(int i) {
 		items.get(i).selectedInInventory = !items.get(i).selectedInInventory;
+	}
+
+	public void toggleItemEquip(int i) {
+		if(items.indexOf(equippedItemStack) == i) {
+			unequipItem();
+		} else {
+			equipItem(i);
+		}
 	}
 
 	public void selectItem(int i) {
