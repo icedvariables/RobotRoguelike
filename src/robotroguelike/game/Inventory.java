@@ -77,6 +77,12 @@ public class Inventory implements Serializable {
 	public ItemStack getEquippedItemStack() {
 		return equippedItemStack;
 	}
+	
+	public int getEquippedItemIndex() {
+		if(equippedItemStack != null)
+			return items.indexOf(equippedItemStack);
+		return -1;
+	}
 
 	public ItemStack[] getSelectedItems() {
 		List<ItemStack> selectedItems = new ArrayList<ItemStack>();

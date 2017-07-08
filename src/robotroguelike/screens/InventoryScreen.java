@@ -24,6 +24,8 @@ public class InventoryScreen implements Screen {
 		this.returnScreen = returnScreen;
 		this.inventory = inventory;
 		this.ownerName = ownerName;
+		if(inventory.getEquippedItemStack() != null)
+			selectorIndex = inventory.getEquippedItemIndex();
 	}
 
 	@Override
