@@ -2,6 +2,7 @@ package robotroguelike.screens;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.util.Arrays;
 
 import robotroguelike.game.Game;
 import robotroguelike.game.GraphicsEngine;
@@ -12,21 +13,27 @@ import robotroguelike.items.ItemStack;
 public class InventoryScreen implements Screen {
 	private Screen returnScreen;
 	private Inventory inventory;
+	private final String ownerName;
 
 	private int selectorIndex = 0;
 
 	private final int OFFSET_X = 4, OFFSET_Y = 3, DESCRIPTION_OFFSET = 25, EQUIPPED_OFFSET = Game.WIDTH - 13,
 			SELECTED_OFFSET = Game.WIDTH - 25;
 
-	public InventoryScreen(Screen returnScreen, Inventory inventory) {
+	public InventoryScreen(Screen returnScreen, Inventory inventory, String ownerName) {
 		this.returnScreen = returnScreen;
 		this.inventory = inventory;
+		this.ownerName = ownerName;
 	}
 
 	@Override
 	public void display(GraphicsEngine graphics) {
-		graphics.drawText("Inventory", OFFSET_X, OFFSET_Y);
-		graphics.drawText("---------", OFFSET_X, OFFSET_Y + 1);
+		graphics.drawText(ownerName + "'s Inventory", OFFSET_X, OFFSET_Y);
+
+		// This just generates a bunch '-' to create an underline for the title.
+		char[] underline = new char[ownerName.length() + 12];
+		Arrays.fill(underline, '-');
+		graphics.drawText(new String(underline), OFFSET_X, OFFSET_Y + 1);
 
 		displayItems(graphics);
 	}

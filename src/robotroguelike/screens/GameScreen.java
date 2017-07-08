@@ -79,7 +79,7 @@ public class GameScreen implements Screen {
 
 		switch (key.getKeyCode()) {
 		case KeyEvent.VK_I:
-			return new InventoryScreen(this, player.inventory);
+			return new InventoryScreen(this, player.inventory, "Player");
 		case KeyEvent.VK_C:
 			return new CraftingScreen(this, player.inventory);
 		case KeyEvent.VK_SPACE:
@@ -91,6 +91,12 @@ public class GameScreen implements Screen {
 			break;
 		case KeyEvent.VK_P:
 			player.placeEquippedItem();
+			break;
+		case KeyEvent.VK_E:
+			Entity e = map.entityAt(player.getX() + player.direction[0], player.getY() + player.direction[1]);
+			if(e != null)
+				return new InventoryScreen(this, e.inventory, "Robot");
+			break;
 		}
 
 		return this;
