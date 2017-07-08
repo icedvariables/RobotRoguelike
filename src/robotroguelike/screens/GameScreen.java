@@ -12,6 +12,8 @@ import robotroguelike.items.ItemIronIngot;
 import robotroguelike.items.ItemLowTierMiningRobot;
 import robotroguelike.items.ItemStack;
 import robotroguelike.items.ItemStone;
+import robotroguelike.logging.Log;
+import robotroguelike.logging.Logger;
 import robotroguelike.map.Map;
 import robotroguelike.map.MapManager;
 import robotroguelike.map.OreMapBuilder;
@@ -20,8 +22,6 @@ import robotroguelike.tiles.TileIronOre;
 import robotroguelike.tiles.TileStone;
 
 public class GameScreen implements Screen {
-	public String infoString = "";
-
 	private Map map;
 	private Player player;
 	private int scrollX = 0, scrollY = 0;
@@ -40,6 +40,7 @@ public class GameScreen implements Screen {
 		System.out.println("Stone in map: " + map.countAmountOfTile(new TileStone()));
 		System.out.println("Iron ore in map: " + map.countAmountOfTile(new TileIronOre()));
 		System.out.println("Copper ore in map: " + map.countAmountOfTile(new TileCopperOre()));
+		Logger.addLog("Built new " + map.width + "x" + map.height + " map.", Log.NORMAL);
 
 		player = new Player(map);
 
@@ -60,14 +61,16 @@ public class GameScreen implements Screen {
 			if (map.creatures.get(i) instanceof Player)
 				player = (Player) map.creatures.get(i);
 		}
-		infoString = "Loaded map from save file '" + map.name + MapManager.FILE_EXTENSION + "'.";
+		Logger.addLog("Loaded map from save file '" + map.name + MapManager.FILE_EXTENSION + "'.", Log.NORMAL);
 	}
 
 	@Override
 	public void display(GraphicsEngine graphics) {
 		displayTiles(graphics);
 		displayCreatures(graphics);
-		graphics.drawText(infoString, 0, Game.HEIGHT - 1);
+		Log log = Logger.getLatestLog();
+		if(log != null)
+			graphics.drawText(log.toString(), 0, Game.HEIGHT - 1, log.getColor());
 		graphics.drawText("Version: " + Game.VERSION, 0, 0);
 	}
 
@@ -88,14 +91,16 @@ public class GameScreen implements Screen {
 			return new CraftingScreen(this, player.inventory);
 		case KeyEvent.VK_D: // DEPOSIT SELECTED ITEMS
 			e = map.entityAt(player.getX() + player.direction[0], player.getY() + player.direction[1]);
-			if(e != null)
+			if(e != null) {
+				Logger.addLog("Depositing selected items into " + e.getName() + "'s inventory.", Log.NORMAL);
 				player.inventory.moveSelectedItemsInto(e.inventory);
+			}
 		case KeyEvent.VK_SPACE: // DIG
 			player.dig();
 			break;
 		case KeyEvent.VK_S: // SAVE MAP
 			MapManager.saveMap(map);
-			infoString = "Saved map to save file '" + map.name + MapManager.FILE_EXTENSION + "'.";
+			Logger.addLog("Saved map to save file '" + map.name + MapManager.FILE_EXTENSION + "'.", Log.NORMAL);
 			break;
 		case KeyEvent.VK_P: // PLACE EQUIPPED ITEM
 			player.placeEquippedItem();

@@ -2,6 +2,8 @@ package robotroguelike.robotscripting;
 
 import robotroguelike.entities.Robot;
 import robotroguelike.items.Item;
+import robotroguelike.logging.Log;
+import robotroguelike.logging.Logger;
 
 public class RobotControl {
 	private Robot robot;
@@ -19,7 +21,7 @@ public class RobotControl {
 	}
 
 	public void display(String text) {
-		System.out.println(robot.getName() + ": " + text);
+		Logger.addLog(robot.getName() + ": " + text, Log.ROBOT_MESSAGE);
 	}
 
 	public String getName() {
